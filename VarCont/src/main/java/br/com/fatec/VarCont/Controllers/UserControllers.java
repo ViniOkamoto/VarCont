@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.com.fatec.VarCont.Controllers;
 
-/**
- *
- * @author OkamotoPc
- */
+package br.com.fatec.VarCont.Controllers;
+import br.com.fatec.VarCont.Models.Usuario;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.*;
+@RestController
+@RequestMapping("/VarCont")
 public class UserControllers {
+    
+    @Autowired
+    private Usuario teste;
     
 }
