@@ -5,6 +5,7 @@ public class Usuario {
 
 @Id
 long id;
+
 @Column(name = "nome")
 String nome;
 
