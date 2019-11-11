@@ -32,7 +32,7 @@ public class Produto {
     @OneToMany(mappedBy="produto",cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     private List<Lote> listaLote = new ArrayList<>();
 
-
+    
     public long getIdProduto() {
         return idProduto;
     }

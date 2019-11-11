@@ -25,11 +25,11 @@ public class Lote {
     Precisamos fazer um jeito de fazer a data DD/MM/AA HH/MM
     */
 	@ManyToOne
-	@JoinColumn(name = "prod_id", nullable = true)
+        @JoinColumn(name = "prod_id", nullable = true)
     private Produto produto;
     
-    @Column(name = "Quantidade")
-    int Quantidade;
+    @Column(name = "quantidade")
+    int quantidade;
 
 
     public long getId() {
@@ -57,11 +57,11 @@ public class Lote {
 	}
 
 	public int getQuantidade() {
-        return Quantidade;
+        return quantidade;
     }
 
-    public void setQuantidade(int Quantidade) {
-        this.Quantidade = Quantidade;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
     
 }

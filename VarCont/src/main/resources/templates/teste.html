@@ -9,7 +9,8 @@
 	<div th:object="${lote}">
 		<div th:if="${lote != null}">
 			<h1>Dados do lote</h1>
-			<p th:text="${lote.Quantidade}"></p>
+			<p th:text="${lote.quantidade}"></p>
+                        <p th:text="${lote.data}" type="date"></p>
 		</div>
 	</div>
 </body>
