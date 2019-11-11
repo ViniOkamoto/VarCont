@@ -1,20 +1,23 @@
 package br.com.fatec.VarCont.DataSource.Models;
 
 import javax.persistence.*;
+@Entity
 public class Usuario {
 //
 //@Id
 //long id;
 //
-//@Column(name = "nome")
+//@Column(name = "usuario_nome")
 //String nome;
 //
-//@Column(name = "Email")
-//String Email;
+//@Column(name = "usuario_email")
+//String email;
 //
-//@Column(name = "Senha")
-//String Senha;
-//
+//@Column(name = "usuario_senha")
+//String senha;
+//    
+//@Column(name = "usuario_administrador")
+//boolean admin;//
 //    public Usuario(int id, String nome, String Email, String Senha) {
 //        this.id = id;
 //        this.nome = nome;
@@ -39,19 +42,27 @@ public class Usuario {
 //    }
 //
 //    public String getEmail() {
-//        return Email;
+//        return email;
 //    }
 //
-//    public void setEmail(String Email) {
-//        this.Email = Email;
+//    public void setEmail(String email) {
+//        this.email = email;
 //    }
 //
 //    public String getSenha() {
-//        return Senha;
+//        return senha;
 //    }
 //
-//    public void setSenha(String Senha) {
-//        this.Senha = Senha;
+//    public void setSenha(String senha) {
+//        this.senha = senha;
+//    }
+    
+//    public String getAdmin() {
+//        return admin;
+//    }
+//
+//    public void setAdmin(String admin) {
+//        this.admin = admin;
 //    }
 
 
