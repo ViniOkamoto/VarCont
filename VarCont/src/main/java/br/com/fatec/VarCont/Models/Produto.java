@@ -1,57 +1,68 @@
 package br.com.fatec.VarCont.Models;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tbl_produto")
 public class Produto {
     
     @Id
-    long idP;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "prod_id")
+    private long idProduto;
     
-    @Column(name = "nomeprod")
-    String nomeprod;
+    @Column(name = "prod_nome")
+    private String nomeProd;
     
-    @Column(name = "ValorCompra")
-    String ValorCompra;
+    @Column(name = "prod_valor_compra")
+    private double valorCompra;
     
-    @Column(name = "ValorVenda")
-    String ValorVenda;
+    @Column(name = "prod_valor_venda")
+    private double valorVenda;
+    
+    @OneToMany(mappedBy="produto",cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Lote> listaLote = new ArrayList<>();
 
-    public Produto(long idP, String nomeprod, String ValorCompra, String ValorVenda) {
-        this.idP = idP;
-        this.nomeprod = nomeprod;
-        this.ValorCompra = ValorCompra;
-        this.ValorVenda = ValorVenda;
+
+    public long getIdProduto() {
+        return idProduto;
     }
 
-    public long getIdP() {
-        return idP;
-    }
-
-    public void setIdP(long idP) {
-        this.idP = idP;
+    public void setIdProduto(long idProduto) {
+        this.idProduto = idProduto;
     }
 
     public String getNomeprod() {
-        return nomeprod;
+        return nomeProd;
     }
 
-    public void setNomeprod(String nomeprod) {
-        this.nomeprod = nomeprod;
+    public void setNomeprod(String nomeProd) {
+        this.nomeProd = nomeProd;
     }
 
-    public String getValorCompra() {
-        return ValorCompra;
+    public double getValorCompra() {
+        return valorCompra;
     }
 
-    public void setValorCompra(String ValorCompra) {
-        this.ValorCompra = ValorCompra;
+    public void setValorCompra(double valorCompra) {
+        this.valorCompra = valorCompra;
     }
 
-    public String getValorVenda() {
-        return ValorVenda;
+    public double getValorVenda() {
+        return valorVenda;
     }
 
-    public void setValorVenda(String ValorVenda) {
-        this.ValorVenda = ValorVenda;
+    public void setValorVenda(double valorVenda) {
+    	this.valorVenda = valorVenda;
     }
-
-    
+ 
 }

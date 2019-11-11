@@ -1,27 +1,36 @@
 package br.com.fatec.VarCont.Models;
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tbl_lote")
 public class Lote {
     
     @Id
-    long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "lote_id")
+    private long id;
     
-    @Column(name = "Data")
-    private Date data = new Date();
+    @Column(name = "lote_data")
+    private Date data;
     /*
     Precisamos fazer um jeito de fazer a data DD/MM/AA HH/MM
     */
-    @Column(name = "idProduto")
-    long idProduto;
+	@ManyToOne
+	@JoinColumn(name = "prod_id", nullable = true)
+    private Produto produto;
     
     @Column(name = "Quantidade")
     int Quantidade;
 
-    public Lote(long id, long idProduto, int Quantidade) {
-        this.id = id;
-        this.idProduto = idProduto;
-        this.Quantidade = Quantidade;
-    }
 
     public long getId() {
         return id;
@@ -39,21 +48,20 @@ public class Lote {
         this.data = data;
     }
 
-    public long getIdProduto() {
-        return idProduto;
-    }
+    public Produto getProduto() {
+		return produto;
+	}
 
-    public void setIdProduto(long idProduto) {
-        this.idProduto = idProduto;
-    }
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
-    public int getQuantidade() {
+	public int getQuantidade() {
         return Quantidade;
     }
 
     public void setQuantidade(int Quantidade) {
         this.Quantidade = Quantidade;
     }
-    
     
 }
