@@ -1,4 +1,4 @@
-package br.com.fatec.VarCont.Models;
+package br.com.fatec.VarCont.DataSource.Models;
 import java.util.Date;
 import javax.persistence.*;
 

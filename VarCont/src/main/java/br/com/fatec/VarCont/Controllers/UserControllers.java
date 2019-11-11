@@ -1,8 +1,8 @@
 
 package br.com.fatec.VarCont.Controllers;
-import br.com.fatec.VarCont.Models.Lote;
-import br.com.fatec.VarCont.Models.Produto;
-import br.com.fatec.VarCont.Models.Usuario;
+import br.com.fatec.VarCont.DataSource.Models.Lote;
+import br.com.fatec.VarCont.DataSource.Models.Produto;
+import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import br.com.fatec.VarCont.Repository.LoteRepository;
 import br.com.fatec.VarCont.Repository.ProdutoRepository;
 
