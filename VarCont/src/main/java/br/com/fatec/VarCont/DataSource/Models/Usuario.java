@@ -1,9 +1,16 @@
 package br.com.fatec.VarCont.DataSource.Models;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "tbl_usuario")
-public class Usuario {
+public class Usuario implements Serializable {
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5818703528229340023L;
 
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +29,11 @@ String senha;
 @Column(name = "usuario_administrador")
 boolean admin;
 
+
+public Usuario(){
+    
+}
+   
     public long getId() {
         return id;
     }

@@ -22,7 +22,7 @@ public class Venda {
     @Column (name = "IdProduto")
     private long IdProduto;
     
-    @Column (name = "Quantidade")
+    @Column (name = "quantidade")
     private int quantidade;
 
     public Venda(long id, int quantidade) {
