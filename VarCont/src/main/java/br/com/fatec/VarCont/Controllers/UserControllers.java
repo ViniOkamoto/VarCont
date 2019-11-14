@@ -1,4 +1,3 @@
-
 package br.com.fatec.VarCont.Controllers;
 
 import java.util.Optional;
@@ -6,32 +5,54 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import br.com.fatec.VarCont.Repository.UsuarioRepository;
+import br.com.fatec.VarCont.Resource.Models.UsuarioResource;
+import br.com.fatec.VarCont.services.BuscarCaixasService;
+import br.com.fatec.VarCont.services.CadastroCaixaService;
+
 import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping(value = "/varcont")
+@RequestMapping(value = "/admin")
 public class UserControllers {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	@GetMapping(path = "/admin/caixa")
-	public List<Usuario> buscarUsuario() {
-		return usuarioRepository.findAll();
+	@Autowired
+	private BuscarCaixasService serviceBuscar;
+
+	@Autowired
+	private CadastroCaixaService serviceCadastro;
+
+	@GetMapping(path = "/caixa")
+	public List<Usuario> buscarCaixa() {
+		return serviceBuscar.buscarCaixa();
 	}
-        
-        @GetMapping(path = "/admin/caixa/{id}")
-         public ResponseEntity<Optional<Usuario>> buscarUsuarioId(
-            @PathVariable(name = "id", required = true)Long id){
-         return ResponseEntity
-                 .ok(usuarioRepository.findById(id));
-    }
+
+	@GetMapping(path = "/caixa/{id}")
+	public ResponseEntity<Optional<Usuario>> buscarCaixaId(@PathVariable(name = "id", required = true) Long id) {
+		return ResponseEntity.ok(usuarioRepository.findById(id));
+	}
+
+	@PostMapping(path = "/caixa/criar")
+	public void criarCaixa(@RequestBody UsuarioResource usuario) {
+
+		serviceCadastro.cadastrar(usuario);
+	}
+
+	@DeleteMapping(path = "/caixa/delete/{id}")
+	public void deleteCaixa(@PathVariable(name = "id", required = true) Long id) {
+		usuarioRepository.deleteById(id);
+	}
 //	@RequestMapping(value = "/adicionarLote", method = RequestMethod.GET)
 //	public String adicionarLote(Model model) {
 //                Produto p = new Produto();
@@ -50,4 +71,3 @@ public class UserControllers {
 //	}
 
 }
-
