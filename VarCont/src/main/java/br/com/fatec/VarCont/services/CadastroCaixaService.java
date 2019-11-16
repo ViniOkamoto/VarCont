@@ -37,9 +37,6 @@ public class CadastroCaixaService {
        
         
     }
-//    public void buscarPorId(){
-//        Optional<Usuario> user = usuarioRepository.findById(1L);
-//        Usuario usuario = user.get();
-//    }
+
     
 }

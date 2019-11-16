@@ -11,7 +11,9 @@ package br.com.fatec.VarCont.Repository;
  */
 import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     
 }

@@ -3,6 +3,11 @@ package br.com.fatec.VarCont.DataSource.Models;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 @Entity
 @Table(name = "tbl_usuario")
 public class Usuario implements Serializable {
@@ -18,15 +23,21 @@ public class Usuario implements Serializable {
 long id;
 
 @Column(name = "usuario_nome")
+@NotEmpty(message = "Nome não pode estar vazio")
 String nome;
 
 @Column(name = "usuario_email")
+@NotEmpty(message = "Email não pode estar vazio")
+@Email
 String email;
 
 @Column(name = "usuario_senha")
+@NotEmpty(message = "Senha não pode estar vazia")
+@Size(min = 4, max = 16, message ="A senha deve ter de 6 a 16 caracteres")
 String senha;
     
 @Column(name = "usuario_administrador")
+@NotNull
 boolean admin;
 
 

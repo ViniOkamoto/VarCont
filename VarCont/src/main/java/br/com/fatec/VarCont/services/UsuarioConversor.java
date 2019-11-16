@@ -33,7 +33,6 @@ public class UsuarioConversor {
 								+ usuarioResource);
 		}
 	}
-	
 		private Boolean checkAdminstrador(String adminstrador) {
 			return Boolean.parseBoolean(adminstrador);
 		}

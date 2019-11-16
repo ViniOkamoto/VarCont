@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping ("/admin")
+@RequestMapping (path = "/admin")
 public class ProdutoController {
     
       
     @Autowired
     private BuscarProdutoService buscarProdutoService;
     
-    @GetMapping (path = "/produto")
+    @GetMapping ("produto")
     public List<Produto> buscarProduto()
     {
         return buscarProdutoService.BuscarProduto();
