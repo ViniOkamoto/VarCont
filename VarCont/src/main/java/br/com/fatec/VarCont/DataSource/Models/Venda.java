@@ -16,45 +16,55 @@ public class Venda {
     /*
     Precisamos fazer um jeito de fazer a data DD/MM/AA HH/MM
     */
-    @Column (name = "IdUsuario")
-    private long IdUsuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
+    private Usuario idUsuario;
     
-    @Column (name = "IdProduto")
-    private long IdProduto;
+    @ManyToOne
+    @JoinColumn (name = "lote_id", referencedColumnName = "lote_id")
+    private Lote idLote;
     
     @Column (name = "quantidade")
     private int quantidade;
 
-    public Venda(long id, int quantidade) {
-        this.id = id;
-        this.quantidade = quantidade;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Date getData() {
+		return data;
+	}
 
-    public Date getData() {
-        return data;
-    }
+	public void setData(Date data) {
+		this.data = data;
+	}
 
-    public void setData(Date data) {
-        this.data = data;
-    }
+	public Usuario getIdUsuario() {
+		return idUsuario;
+	}
 
-    public int getQuantidade() {
-        return quantidade;
-    }
+	public void setIdUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public void setQuantidade(int Quantidade) {
-        this.quantidade = Quantidade;
-    }
-  
-    
-    
+	public Lote getIdLote() {
+		return idLote;
+	}
+
+	public void setIdLote(Lote idLote) {
+		this.idLote = idLote;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
     
 }

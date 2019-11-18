@@ -14,12 +14,12 @@ import br.com.fatec.VarCont.exceptions.UsuarioNotFoundException;
 import br.com.fatec.VarCont.exceptions.UsuarioResourceException;
 
 @Service
-public class CaixaService {
+public class UsuarioService {
 
-	private static final Logger LOG = Logger.getLogger(CaixaService.class);
+	private static final Logger LOG = Logger.getLogger(UsuarioService.class);
 
-	 @Autowired
-	    private UsuarioConversor serviceConversor;
+	@Autowired
+	private UsuarioConversor serviceConversor;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -29,11 +29,11 @@ public class CaixaService {
 		return optionalUsuario;
 	}
 
-	public List<Usuario> buscarCaixa() {
-		LOG.info("Serviço para buscar os caixas, sendo executado");
-		List<Usuario> listaCaixas = usuarioRepository.findAll();
+	public List<Usuario> buscarUsuario() {
+		LOG.info("Serviço para buscar os usuario, sendo executado");
+		List<Usuario> listaUsuarios = usuarioRepository.findAll();
 
-		return listaCaixas;
+		return listaUsuarios;
 	}
 
 	public Usuario buscarId(Long id) throws UsuarioNotFoundException {
@@ -44,7 +44,7 @@ public class CaixaService {
 		} else {
 			usuario = optionalUsuario.get();
 		}
-		LOG.info("Serviço para buscar caixa, sendo executado");
+		LOG.info("Serviço para buscar usuario, sendo executado");
 		return usuario;
 	}
 
@@ -53,12 +53,12 @@ public class CaixaService {
 		if (!optionalUsuario.isPresent()) {
 			throw new UsuarioNotFoundException("Usuario não encontrado através do ID: " + id);
 		} else {
-			LOG.info("Serviço para deletar caixa, sendo executado");
+			LOG.info("Serviço para deletar usuario, sendo executado");
 			usuarioRepository.delete(optionalUsuario.get());
 		}
 	}
     
-	public void cadastrar(UsuarioResource usuarioResource){
+	public void cadastrarUsuario(UsuarioResource usuarioResource){
 	try {
 		LOG.info("Serviço para criar caixa, sendo executado");
 		Usuario usuario = serviceConversor.conversor(usuarioResource);

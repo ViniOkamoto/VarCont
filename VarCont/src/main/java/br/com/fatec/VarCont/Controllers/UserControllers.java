@@ -1,6 +1,5 @@
 package br.com.fatec.VarCont.Controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +13,7 @@ import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import br.com.fatec.VarCont.Repository.UsuarioRepository;
 import br.com.fatec.VarCont.Resource.Models.UsuarioResource;
 import br.com.fatec.VarCont.exceptions.UsuarioNotFoundException;
-import br.com.fatec.VarCont.services.BuscarCaixasIdService;
-import br.com.fatec.VarCont.services.BuscarCaixasService;
-import br.com.fatec.VarCont.services.CadastroCaixaService;
+import br.com.fatec.VarCont.services.UsuarioService;
 import br.com.fatec.VarCont.services.UsuarioConversor;
 
 import java.util.List;
@@ -33,55 +30,48 @@ public class UserControllers {
 
 	@Autowired
 	UsuarioConversor serviceConversor;
-	
-	@Autowired
-	UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private BuscarCaixasService serviceBuscar;
 
 	@Autowired
-	private CadastroCaixaService serviceCadastro;
+	private UsuarioService serviceCaixa;
 
 	@Autowired
-	private BuscarCaixasIdService serviceBuscarId;
+	private UsuarioRepository usuarioRepository;
+
+
 	@GetMapping(path = "/caixa")
 	public List<Usuario> buscarCaixa() {
-		return serviceBuscar.buscarCaixa();
+		return serviceCaixa.buscarUsuario();
 	}
 
 	@GetMapping("caixa/{id}")
-	public Usuario buscarCaixaId(
-			@PathVariable(name = "id", required = true) Long id)
-	throws UsuarioNotFoundException{
-		return serviceBuscarId.buscarId(id);
+	public Usuario buscarCaixaId(@PathVariable(name = "id", required = true) Long id) throws UsuarioNotFoundException {
+		return serviceCaixa.buscarId(id);
 	}
 
 	@PostMapping("caixa/criar")
 	public void criarCaixa(@Valid @RequestBody UsuarioResource usuarioResource) {
 
-		serviceCadastro.cadastrar(usuarioResource);
+		serviceCaixa.cadastrarUsuario(usuarioResource);
 	}
 
 	@DeleteMapping("caixa/{id}")
 	public void deleteCaixa(@PathVariable(name = "id", required = true) Long id) throws UsuarioNotFoundException {
-		serviceBuscarId.deletarId(id);
+		serviceCaixa.deletarId(id);
 	}
-	
+
 	@PutMapping("caixa/{id}")
 	public ResponseEntity<Usuario> alterarCaixa(@PathVariable Long id, @RequestBody Usuario usuario) {
-		
+
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
-		if(!usuarioOptional.isPresent()) {
+		if (!usuarioOptional.isPresent()) {
 			return ResponseEntity.notFound().build();
-		}
-		
+		}else {
+
 		usuario.setId(id);
 		usuarioRepository.save(usuario);
-		
+
 		return ResponseEntity.noContent().build();
-		
-	
+		}
 	}
 //	@RequestMapping(value = "/adicionarLote", method = RequestMethod.GET)
 //	public String adicionarLote(Model model) {

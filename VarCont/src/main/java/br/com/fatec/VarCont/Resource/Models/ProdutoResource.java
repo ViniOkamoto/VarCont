@@ -12,50 +12,57 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author OkamotoPc
  */
 public class ProdutoResource {
-    
+	 // Aqui � onde decidimos o que colocaremos na requisi��o para api.
     @JsonProperty ("prod_nome")
     private String nomeProd; 
     
     @JsonProperty ("prod_valor_compra")
-    private String valorCompra; 
+    private Double valorCompra; 
     
     @JsonProperty ("prod_valor_venda")
-    private String valorVenda; 
+    private Double valorVenda; 
 
-    public ProdutoResource(String nomeProd, String valorCompra, String valorVenda) {
-        this.nomeProd = nomeProd;
-        this.valorCompra = valorCompra;
-        this.valorVenda = valorVenda;
-    }
+	
+	public ProdutoResource(String nomeProd, Double valorCompra, Double valorVenda) {
+		this.nomeProd = nomeProd;
+		this.valorCompra = valorCompra;
+		this.valorVenda = valorVenda;
+	}
 
-    public String getNomeProd() {
-        return nomeProd;
-    }
 
-    public void setNomeProd(String nomeProd) {
-        this.nomeProd = nomeProd;
-    }
+	public String getNomeProd() {
+		return nomeProd;
+	}
 
-    public String getValorCompra() {
-        return valorCompra;
-    }
 
-    public void setValorCompra(String valorCompra) {
-        this.valorCompra = valorCompra;
-    }
+	public void setNomeProd(String nomeProd) {
+		this.nomeProd = nomeProd;
+	}
 
-    public String getValorVenda() {
-        return valorVenda;
-    }
 
-    public void setValorVenda(String valorVenda) {
-        this.valorVenda = valorVenda;
-    }
+	public Double getValorCompra() {
+		return valorCompra;
+	}
 
- 
-    @Override
-    public String toString()
-            {
-                return "produtoResource[nome=" +nomeProd+ ", valor da compra"+ valorCompra+ ", valor da venda " +valorVenda+"]";
-            }
+
+	public void setValorCompra(Double valorCompra) {
+		this.valorCompra = valorCompra;
+	}
+
+
+	public Double getValorVenda() {
+		return valorVenda;
+	}
+
+
+	public void setValorVenda(Double valorVenda) {
+		this.valorVenda = valorVenda;
+	}
+
+
+	@Override
+	public String toString() {
+		return "ProdutoResource [nomeProd=" + nomeProd + ", valorCompra=" + valorCompra + ", valorVenda=" + valorVenda
+				+ "]";
+	}
 }

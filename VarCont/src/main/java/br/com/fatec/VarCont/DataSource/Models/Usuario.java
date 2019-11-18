@@ -1,13 +1,16 @@
 package br.com.fatec.VarCont.DataSource.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tbl_usuario")
 public class Usuario implements Serializable {
@@ -37,13 +40,11 @@ String email;
 String senha;
     
 @Column(name = "usuario_administrador")
-@NotNull
+@NotNull(message= "Tipo de usuário não ser vazio")
 boolean admin;
 
-
-public Usuario(){
-    
-}
+@OneToMany(mappedBy="idUsuario",cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+private List<Venda> listaVenda = new ArrayList<>();
    
     public long getId() {
         return id;
