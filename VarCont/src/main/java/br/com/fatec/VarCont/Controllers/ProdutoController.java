@@ -46,7 +46,7 @@ public class ProdutoController {
     }
     
     @GetMapping("produto/{id}")
-	public Produto buscarProdutoId(@PathVariable(name = "id", required = true) Long id) throws UsuarioNotFoundException, ProdutoNotFoundException {
+	public Produto buscarProdutoId(@PathVariable(name = "id", required = true) Long id) throws ProdutoNotFoundException {
 		return serviceProduto.buscarId(id);
 	}
     
