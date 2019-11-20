@@ -2,10 +2,17 @@
 function ApiLogin(){
     var api = new Object;
 
-    api.Login = function(user, successAction, errorAction) {
+    api.Login = function(user, onSuccess, onBefore, onComplete, onError) {
         // Temporary - Ajax or Axios code to access api
-        let answer = (user.login == 'user@user.com' && user.password == 'user123') ? true : false;
-        successAction(answer);
+        user.admin = true;
+        let answer = (user.email == 'user@user.com' && user.password == 'user123') ? user : undefined;
+
+        onBefore();
+        setTimeout(function(){
+            onSuccess(answer);
+            onComplete();
+        }, 2000);
     }
+
     return api;
 }

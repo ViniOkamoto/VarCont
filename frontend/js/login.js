@@ -1,6 +1,7 @@
 const inputEmail = $('#inpEmail');
-const inputPassword = $('#inpPassword') 
+const inputPassword = $('#inpPassword'); 
 const formSubmit = $('#formSubmit');
+const buttonLogin = $('#btnLogin');
 
 $(function() {
     setBackgroundSize();
@@ -19,11 +20,16 @@ formSubmit.submit(function(form){
     };
 
     const api = ApiLogin();
-    api.Login(user, function(aswer){
-        if (answer)
+    api.Login(user, function(answer){
+        if (answer !== undefined)
             console.log('Login efetuado com sucesso.');
         else
-            console.log('Email ou senha incorreto.');
+            console.log('Email ou senha incorretos.');
+            inputPassword.val('');
+    }, function(){
+        buttonLogin.text('Carregando...');
+    }, function(){
+        buttonLogin.text('Login');
     }, function(erro){
         console.log('Ocorreu um erro ao acessar a API de Login');
     })
