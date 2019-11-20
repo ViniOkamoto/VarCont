@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.fatec.VarCont.Resource.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- *
- * @author OkamotoPc
- */
 public class ProdutoResource {
 	 // Aqui � onde decidimos o que colocaremos na requisi��o para api.
     @JsonProperty ("prod_nome")

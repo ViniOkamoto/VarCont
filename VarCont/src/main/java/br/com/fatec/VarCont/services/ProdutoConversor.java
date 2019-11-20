@@ -21,7 +21,7 @@ public class ProdutoConversor {
 
 		try {
 			Produto produto = new Produto();
-			produto.setNomeprod(produtoResource.getNomeProd());
+			produto.setNomeProd(produtoResource.getNomeProd());
 			produto.setValorCompra(produtoResource.getValorCompra());
 			produto.setValorVenda(produtoResource.getValorVenda());
 			return produto;

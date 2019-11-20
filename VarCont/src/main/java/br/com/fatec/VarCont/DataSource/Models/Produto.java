@@ -44,39 +44,51 @@ public class Produto implements Serializable {
     private double valorVenda;
     
     @OneToMany(mappedBy="idProduto",cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Lote> listaLote = new ArrayList<>();
+    private List<Venda> listaVenda = new ArrayList<>();
+
+	public long getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(long idProduto) {
+		this.idProduto = idProduto;
+	}
+
+	public String getNomeProd() {
+		return nomeProd;
+	}
+
+	public void setNomeProd(String nomeProd) {
+		this.nomeProd = nomeProd;
+	}
+
+	public double getValorCompra() {
+		return valorCompra;
+	}
+
+	public void setValorCompra(double valorCompra) {
+		this.valorCompra = valorCompra;
+	}
+
+	public double getValorVenda() {
+		return valorVenda;
+	}
+
+	public void setValorVenda(double valorVenda) {
+		this.valorVenda = valorVenda;
+	}
+
+	public List<Venda> getListaVenda() {
+		return listaVenda;
+	}
+
+	public void setListaVenda(List<Venda> listaVenda) {
+		this.listaVenda = listaVenda;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
-    
-    public long getIdProduto() {
-        return idProduto;
-    }
-
-    public void setIdProduto(long idProduto) {
-        this.idProduto = idProduto;
-    }
-
-    public String getNomeprod() {
-        return nomeProd;
-    }
-
-    public void setNomeprod(String nomeProd) {
-        this.nomeProd = nomeProd;
-    }
-
-    public double getValorCompra() {
-        return valorCompra;
-    }
-
-    public void setValorCompra(double valorCompra) {
-        this.valorCompra = valorCompra;
-    }
-
-    public double getValorVenda() {
-        return valorVenda;
-    }
-
-    public void setValorVenda(double valorVenda) {
-    	this.valorVenda = valorVenda;
-    }
  
 }

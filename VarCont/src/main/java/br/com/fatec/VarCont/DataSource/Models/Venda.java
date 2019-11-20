@@ -1,31 +1,32 @@
 package br.com.fatec.VarCont.DataSource.Models;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_venda")
-public class Venda {
+public class Venda implements Serializable {
     
-    @Id
+	private static final long serialVersionUID = -2212373740869554918L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ven_id")
     long id;
 
     @Column(name = "ven_data")
-    private Date data;
-    /*
-    Precisamos fazer um jeito de fazer a data DD/MM/AA HH/MM
-    */
+    private Date data = new Date();
+
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     private Usuario idUsuario;
     
     @ManyToOne
-    @JoinColumn (name = "lote_id", referencedColumnName = "lote_id")
-    private Lote idLote;
+    @JoinColumn (name = "prod_id", referencedColumnName = "prod_id")
+    private Produto idProduto;
     
-    @Column (name = "quantidade")
-    private int quantidade;
+    @Column (name = "ven_qtd")
+    private int qtdVenda;
 
 	public long getId() {
 		return id;
@@ -51,20 +52,20 @@ public class Venda {
 		this.idUsuario = idUsuario;
 	}
 
-	public Lote getIdLote() {
-		return idLote;
+	public Produto getIdProduto() {
+		return idProduto;
 	}
 
-	public void setIdLote(Lote idLote) {
-		this.idLote = idLote;
+	public void setIdProduto(Produto idProduto) {
+		this.idProduto = idProduto;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
+	public int getQtdVenda() {
+		return qtdVenda;
 	}
 
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+	public void setQtdVenda(int qtdVenda) {
+		this.qtdVenda = qtdVenda;
 	}
     
 }
