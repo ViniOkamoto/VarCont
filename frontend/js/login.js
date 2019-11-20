@@ -4,5 +4,5 @@ $(function() {
 
 function setBackgroundSize() {
     windowSize = $(window).height();
-    $('.background').height(windowSize);
+    $('.bem-vindo').height(windowSize);
 }

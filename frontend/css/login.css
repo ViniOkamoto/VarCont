@@ -33,18 +33,10 @@ h5 {
     color: white;
 }
 
-/* .background {
+.bem-vindo {
     background: url(../assets/background.png);
-    width: 100%;
-    padding-top: 100%;
     background-size: cover;
-    object-fit: cover;
-    object-position: center;
     background-position: center;
-} */
-
-.background {
-    background-color: darkorange;
 }
 
 #login img {
@@ -68,4 +60,9 @@ h5 {
     border-radius: 40px;
     padding: 8px 15px;
     border: 0;
+}
+
+#login button:hover{
+    cursor: pointer;
+    background-color: #333333;
 }
