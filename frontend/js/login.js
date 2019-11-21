@@ -21,24 +21,22 @@ formSubmit.submit(function(form){
 
     const api = ApiLogin();
     api.Login(user, function(answer){
-        if (answer !== undefined) {
-            if (answer === 'admin')
-                window.location.replace('http://127.0.0.1:5500/dashboard.html');
-            else
-                console.log('Redirecionando para a tela Caixa.')            
-        }
+        if (answer === 'admin')
+            window.location.replace('http://127.0.0.1:5500/dashboard.html');
         else
-        {
-            const toast = { title: 'Erro no Login', message: 'Usuario ou senha inválidos, tente novamente.', delay: 3000 };
-            NewToast(toast);
-        }
-        inputPassword.val('');
+            console.log('Redirecionando para a tela Caixa.')
     }, function(){
         buttonLogin.text('Carregando...');
     }, function(){
         buttonLogin.text('Login');
+        inputPassword.val('');
     }, function(erro){
-        const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.', delay: 3000 };
-        NewToast(toast);
+        if (erro.status == 400) {
+            const toast = { title: 'Erro no Login', message: 'Usuario ou senha inválidos, tente novamente.', delay: 3000 };
+            NewToast(toast);
+        } else {
+            const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.', delay: 3000 };
+            NewToast(toast);
+        }
     })
 })
