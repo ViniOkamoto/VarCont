@@ -17,8 +17,9 @@ function ApiLogin(){
     api.Login = function(user, onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
         axios.post(baseUrlApi + 'login/', user)
-            .then(function(response){ onSuccess(response), onComplete() })
+            .then(function(response){ onSuccess(response)})
             .catch(function(error){ onError(error) })
+            .finally(function () { onComplete() });
     }
 
     return api;
