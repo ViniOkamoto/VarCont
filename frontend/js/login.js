@@ -16,7 +16,7 @@ formSubmit.submit(function(form){
     form.preventDefault();
     const user = {
         email: inputEmail.val(),
-        password: inputPassword.val()
+        senha: inputPassword.val()
     };
 
     const api = ApiLogin();
@@ -38,6 +38,7 @@ formSubmit.submit(function(form){
     }, function(){
         buttonLogin.text('Login');
     }, function(erro){
-        console.log('Ocorreu um erro ao acessar a API de Login');
+        const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.', delay: 3000 };
+        NewToast(toast);
     })
 })
