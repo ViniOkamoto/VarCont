@@ -21,3 +21,55 @@ textarea:focus,
 button:focus {
     outline: none;
 }
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+header {
+    padding: 15px;
+    background-color: #ea6900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+header i{
+    font-size: 28px !important;
+}
+
+#logo {
+    height: 28px;
+    margin: 5px 0 0 18px;
+}
+
+h3 {
+    font-family: filsonbold;
+    text-transform: uppercase;
+}
+
+.btnAdd {
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    text-transform: uppercase;
+    box-shadow:  0 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    font-family: filsonbold;
+}
+
+.card-item {
+    box-shadow:  0 1px 5px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    border-radius: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-item h5{
+    color: #ea6900;
+}
