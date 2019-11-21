@@ -1,7 +1,6 @@
 package br.com.fatec.VarCont.services;
 
 import org.springframework.stereotype.Component;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,8 @@ public class LoteConversor {
 			Produto produto = new Produto();
 			produto = optionalProduto.get();
 			Lote lote = new Lote();
-			Date date = new Date(); 
 			int qtdCompra = checkCompra(loteResource.getQtdCompra());
 			int qtdTotal = checkTotal(loteResource.getQtdTotal());
-			lote.setData(date);
 			lote.setIdProduto(produto);
 			lote.setQtdCompra(qtdCompra);
 			lote.setQtdTotal(qtdTotal);

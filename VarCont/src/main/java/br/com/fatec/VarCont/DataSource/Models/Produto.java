@@ -43,8 +43,6 @@ public class Produto implements Serializable {
     @NotNull(message = "O valor de venda não pode ser vazio")
     private double valorVenda;
     
-    @OneToMany(mappedBy="idProduto",cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Venda> listaVenda = new ArrayList<>();
 
 	public long getIdProduto() {
 		return idProduto;
@@ -78,13 +76,6 @@ public class Produto implements Serializable {
 		this.valorVenda = valorVenda;
 	}
 
-	public List<Venda> getListaVenda() {
-		return listaVenda;
-	}
-
-	public void setListaVenda(List<Venda> listaVenda) {
-		this.listaVenda = listaVenda;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
