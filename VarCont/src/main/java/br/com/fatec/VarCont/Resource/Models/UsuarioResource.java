@@ -2,10 +2,7 @@ package br.com.fatec.VarCont.Resource.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- *
- * @author OkamotoPc
- */
+
 public class UsuarioResource {
   // Aqui � onde decidimos o que colocaremos na requisi��o para api.
 	
@@ -19,13 +16,13 @@ public class UsuarioResource {
     private String senha;
     
     @JsonProperty("usuario_administrador")
-    private String administrador;
+    private String admin;
 
     public UsuarioResource(String nome, String email, String senha, String administrador) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.administrador = administrador;
+        this.admin = administrador;
     }
 
    
@@ -54,18 +51,18 @@ public class UsuarioResource {
     }
 
     public String getAdministrador() {
-        return administrador;
+        return admin;
     }
 
     public void setAdministrador(String administrador) {
-        this.administrador = administrador;
+        this.admin = administrador;
     }
 
 
 	@Override
 	public String toString() {
 		return "UsuarioResource [nome=" + nome + ", email=" + email + ", senha=" + senha + ", administrador="
-				+ administrador + "]";
+				+ admin + "]";
 	}
     
 }
