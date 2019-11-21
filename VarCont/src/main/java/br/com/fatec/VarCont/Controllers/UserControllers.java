@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "admin")
 public class UserControllers {
 
 	@Autowired

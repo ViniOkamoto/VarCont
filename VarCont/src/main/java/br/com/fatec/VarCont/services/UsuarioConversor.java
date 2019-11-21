@@ -20,7 +20,7 @@ public class UsuarioConversor {
 
 		try {
 			Usuario usuario = new Usuario();
-			Boolean adminstrador = checkAdminstrador(usuarioResource.getAdministrador());
+			Boolean adminstrador = checkAdminstrador(usuarioResource.getAdmin());
 			usuario.setEmail(usuarioResource.getEmail());
 			usuario.setNome(usuarioResource.getNome());
 			usuario.setSenha(usuarioResource.getSenha());

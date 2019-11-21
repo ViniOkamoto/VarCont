@@ -47,6 +47,7 @@ public class CaixaController {
 //		return id;
 //	}
 //	
+	
 	@GetMapping("vendas")
 	public List<Venda> buscarVendasUser(HttpSession session) {
 		Usuario usuario = (Usuario)session.getAttribute("login");
