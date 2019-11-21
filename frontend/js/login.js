@@ -21,11 +21,18 @@ formSubmit.submit(function(form){
 
     const api = ApiLogin();
     api.Login(user, function(answer){
-        if (answer !== undefined)
-            console.log('Login efetuado com sucesso.');
+        if (answer !== undefined) {
+            if (answer === 'admin')
+                window.location.replace('http://127.0.0.1:5500/dashboard.html');
+            else
+                console.log('Redirecionando para a tela Caixa.')            
+        }
         else
-            console.log('Email ou senha incorretos.');
-            inputPassword.val('');
+        {
+            const toast = { title: 'Erro no Login', message: 'Usuario ou senha inválidos, tente novamente.', delay: 3000 };
+            NewToast(toast);
+        }
+        inputPassword.val('');
     }, function(){
         buttonLogin.text('Carregando...');
     }, function(){

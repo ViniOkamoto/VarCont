@@ -1,11 +1,11 @@
+const baseUrlApiLogin = 'http://localhost:8181/login/';
 
 function ApiLogin(){
     var api = new Object;
 
     api.Login = function(user, onSuccess, onBefore, onComplete, onError) {
         // Temporary - Ajax or Axios code to access api
-        user.admin = true;
-        let answer = (user.email == 'user@user.com' && user.password == 'user123') ? user : undefined;
+        let answer = (user.email == 'user@user.com' && user.password == 'user123') ? 'admin' : undefined;
 
         onBefore();
         setTimeout(function(){
