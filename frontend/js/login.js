@@ -22,7 +22,7 @@ formSubmit.submit(function(form){
     const api = ApiLogin();
     api.Login(user, function(answer){
         if (answer === 'admin')
-            window.location.replace('http://127.0.0.1:5500/dashboard.html');
+            window.location.replace('http://127.0.0.1:5500/usuarios.html');
         else
             console.log('Redirecionando para a tela Caixa.')
     }, function(){
@@ -35,7 +35,7 @@ formSubmit.submit(function(form){
             const toast = { title: 'Erro no Login', message: 'Usuario ou senha inválidos, tente novamente.', delay: 3000 };
             NewToast(toast);
         } else {
-            const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.', delay: 3000 };
+            const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.'};
             NewToast(toast);
         }
     })

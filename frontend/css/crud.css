@@ -26,14 +26,21 @@ h1, h2, h3, h4, h5 {
     margin: 0;
 }
 
-h1 {
+#sectionTitle {
     font: 28px filsonbold;
     text-transform: uppercase;
 }
 
-.h2{
-    font: 20px;
+.card-item h2{
+    font-size: 20px;
     color: #ea6900;
+    font-weight: 600;
+}
+
+.card-item h3{
+    color: #ea6900;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 header {
@@ -74,4 +81,23 @@ header i{
     background-color: white;
     border-radius: 4px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-card{
+    cursor: pointer;
+}
+
+.userInfo {
+    color: #929292;
+    font-size: 16px;
+}
+
+.btnEdit {
+    background-color: #ea6900;
+    color: white;
+    font-family: filsonlight;
+    font-size: 16px;
+    border-radius: 40px;
+    padding: 4px 14px;
+    border: 0;
 }
