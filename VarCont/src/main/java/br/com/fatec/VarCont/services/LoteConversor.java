@@ -23,10 +23,9 @@ public class LoteConversor {
 			produto = optionalProduto.get();
 			Lote lote = new Lote();
 			int qtdCompra = checkCompra(loteResource.getQtdCompra());
-			int qtdTotal = checkTotal(loteResource.getQtdTotal());
 			lote.setIdProduto(produto);
 			lote.setQtdCompra(qtdCompra);
-			lote.setQtdTotal(qtdTotal);
+			lote.setQtdTotal(qtdCompra);
 			return lote;
 		}catch(Exception e) {
 			throw new LoteResourceException(
@@ -36,9 +35,6 @@ public class LoteConversor {
 		
 	}
 	private int checkCompra(String num) {
-		return Integer.parseInt(num);
-	}
-	private int checkTotal(String num) {
 		return Integer.parseInt(num);
 	}
 }

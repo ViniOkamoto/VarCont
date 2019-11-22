@@ -69,14 +69,11 @@ public class UsuarioService {
 	}
        
 }
-	public void alterarUsuario(Usuario usuario, Long id) throws UsuarioNotFoundException {
+	public void alterarUsuario(UsuarioResource usuarioResource, Long id) throws UsuarioNotFoundException, UsuarioResourceException {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 		if (!usuarioOptional.isPresent()) {
-			throw new UsuarioNotFoundException("Usuario não encontrado através do ID: " + usuario.getId());
-		}else {
-			usuario.setId(id);
-			serviceConversor.checkEmail(usuario.getEmail());
-			usuarioRepository.save(usuario);
+			throw new UsuarioNotFoundException("Usuario não encontrado através do ID: " + id);
 		}
+			usuarioRepository.save(serviceConversor.alterarConversor(usuarioResource, id));
 	}
 }

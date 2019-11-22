@@ -103,18 +103,18 @@ public class UserControllers {
 	}	
 }
 	@PutMapping("usuario/{id}")
-	public ResponseEntity<Object> alterarCaixa(@PathVariable Long id, @RequestBody Usuario usuario,
+	public ResponseEntity<Object> alterarCaixa(@PathVariable Long id, @RequestBody UsuarioResource usuarioResource,
 			HttpSession session) {
 		try {
 			Usuario usuarioSessão = (Usuario) session.getAttribute("login");
 			// Confere sessão
 			if (usuarioSessão != null) {
-				if (usuario.isAdmin() != true) {
+				if (usuarioSessão.isAdmin() != true) {
 					return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 							.body("Você precisa ser Admin para realizar essa ação");
 				}
-				serviceUsuario.alterarUsuario(usuario, id);
-				return ResponseEntity.ok(null);
+				serviceUsuario.alterarUsuario(usuarioResource, id);
+				return ResponseEntity.ok("Usuario alterado");
 			}
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa estar logado");
 		} catch (Exception e) {
