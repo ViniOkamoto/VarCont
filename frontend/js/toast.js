@@ -8,8 +8,14 @@ function NewToast(toast) {
         )   
     }
 
+    let prop;
+    if (toast.delay == undefined)
+        prop = 'data-autohide="false"';
+    else
+        prop = 'data-delay="' + toast.delay + '"';
+
     $('#toast-place').append(
-        '<div class="toast" role="alert" style="font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif" aria-live="assertive" aria-atomic="true" data-delay="' + toast.delay + '">' +
+        '<div class="toast" role="alert" style="font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif" aria-live="assertive" aria-atomic="true" ' + prop + '>' +
             '<div class="toast-header">' +
                 '<strong class="mr-auto">' + toast.title + '</strong>' +
                 '<small class="text-muted">Agora</small>' +
