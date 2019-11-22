@@ -11,6 +11,6 @@ import br.com.fatec.VarCont.DataSource.Models.Venda;
 
 @Repository
 public interface VendaRepository extends JpaRepository<Venda, Long> {
-	@Query("SELECT u FROM Venda u WHERE u.idUsuario = :idUsuario")
+	@Query(value = "SELECT * FROM tbl_venda  WHERE usuario_id = :idUsuario", nativeQuery = true)
 	public List<Venda> findByUserId(@Param("idUsuario") Long idUsuario);
 }

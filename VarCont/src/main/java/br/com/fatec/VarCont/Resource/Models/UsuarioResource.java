@@ -17,8 +17,6 @@ public class UsuarioResource {
     
     @JsonProperty("usuario_administrador")
     private String admin;
-
-
     
     public UsuarioResource(String nome, String email, String senha, String admin) {
 		this.nome = nome;

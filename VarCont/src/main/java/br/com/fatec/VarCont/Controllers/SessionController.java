@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import br.com.fatec.VarCont.Repository.UsuarioRepository;
+import br.com.fatec.VarCont.Resource.Models.LoginResource;
 
 @RestController
 public class SessionController {
@@ -20,9 +21,9 @@ public class SessionController {
 
 	@PostMapping("login")
 	@ResponseBody
-	public ResponseEntity<Object> validarLogin(@RequestBody Usuario usuario , HttpSession session) {
+	public ResponseEntity<Object> validarLogin(@RequestBody LoginResource loginResource , HttpSession session) {
 		try{
-			usuario =  usuarioRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getSenha() );
+			Usuario usuario =  usuarioRepository.findByEmailAndPassword(loginResource.getEmail(), loginResource.getSenha() );
 			if(!usuario.equals(null)) {
 			if(usuario.isAdmin() == true) {
 				session.setAttribute("login", usuario);

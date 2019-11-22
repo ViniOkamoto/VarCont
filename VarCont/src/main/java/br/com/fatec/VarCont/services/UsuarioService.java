@@ -68,6 +68,15 @@ public class UsuarioService {
 		LOG.error("Erro em salva o usuario: " + e.getMessage(), e);
 	}
        
-	
 }
+	public void alterarUsuario(Usuario usuario, Long id) throws UsuarioNotFoundException {
+		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+		if (!usuarioOptional.isPresent()) {
+			throw new UsuarioNotFoundException("Usuario não encontrado através do ID: " + usuario.getId());
+		}else {
+			usuario.setId(id);
+			serviceConversor.checkEmail(usuario.getEmail());
+			usuarioRepository.save(usuario);
+		}
+	}
 }
