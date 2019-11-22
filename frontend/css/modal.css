@@ -1,0 +1,71 @@
+label {
+    margin: 0;
+}
+
+.header-modal {
+    background-color: #ea6900;
+    color: white;
+    text-transform: uppercase;
+    padding: 15px;
+    border-radius: 3px 3px 0 0;
+}
+
+.header-modal h1 {
+    font-family: filsonbold;
+    font-size: 20px;
+}
+
+.content-modal {
+    padding: 20px;
+    font-size: 16px;
+    color: #414141;
+    line-height: 1.5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content-modal input {
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    color: #929292;
+    border-bottom: 1px solid #EE9A00;
+}
+
+.title {
+    color: #ea6900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.title i {
+    font-size: 18px
+}
+
+.subtitle {
+    color: #ea6900;
+    font-size: 16px;   
+    font-weight: 500;
+}
+
+label[for="radio-admin"], label[for="radio-caixa"]{
+    color: #797979;
+    cursor: pointer;
+}
+
+#i-admin, #i-caixa {
+        font-size: 16px;
+        color: #797979;
+}
+
+.btnSave {
+    background-color: #ea6900;
+    color: white;
+    font-family: filsonlight;
+    font-size: 16px;
+    border-radius: 40px;
+    padding: 4px 14px;
+    border: 0;
+}
+
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/crud.css">
+    <link rel="stylesheet" href="css/modal.css">
+
+    <link rel="icon" type="imagem/png" href="assets/icon.png" />
+    <title>VarCont | Dashboard</title>
+</head>
+
+<body>
+    <header>
+        <div class="d-flex align-items-center">
+            <i class="material-icons">menu</i>
+            <img src="assets/logo-branca.png" id="logo" alt="Logo">
+        </div>
+        <i class="material-icons">more_vert</i>
+    </header>
+
+    <div class="container-fluid p-4">
+        <div class="row mb-3">
+            <div class="col d-flex justify-content-between align-items-center px-4">
+                <h1 id="sectionTitle">USUARIOS</h1>
+                <div class="btnAdd">+</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card-item p-3 mb-3">
+                    <div class="header-card cursor-pointer d-flex justify-content-between align-items-center">
+                        <h2>Victor Martins Tinoco</h2>
+                        <i class="material-icons expand">
+                            expand_more
+                        </i>
+                    </div>
+                    <div class="body-card d-none">
+                        <div class="d-flex justify-content-between align-items-end">
+                            <div class="d-flex flex-column mt-3">
+                                <h3>Email:</h3>
+                                <div class="userInfo mb-2">Email do usuário</div>
+                                <h3>Senha:</h3>
+                                <div class="userInfo mb-2">Senha do usuário</div>
+                                <h3>Tipo de Usuário</h3>
+                                <div class="userInfo">Tipo do Usuário</div>
+                            </div>
+                            <button class="btnEdit" data-id="3" data-toggle="modal"
+                                data-target="#edit-modal">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal modal-dialog-centered" role="document">
+                <div class="modal-content" style="border-radius: 3px; border: 0;">
+                    <div class="header-modal d-flex align-items-center justify-content-between">
+                        <span></span>
+                        <h1>Usuario</h1>
+                        <a data-dismiss="modal" style="cursor: pointer;" class="mr-2">X</a>
+                    </div>
+                    <div class="content-modal">
+                        <div class="title d-flex align-items-center pb-2">
+                            <i class="material-icons">
+                                account_circle
+                            </i>
+                            <div class="ml-2">Dados do Usuário</div>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <input type="hidden" id="id-user">
+
+                            <label class="subtitle" for="email">Email</label>
+                            <input id="email" placeholder="Digite seu e-mail">
+
+                            <label class="subtitle mt-2" for="senha">Senha</label>
+                            <input id="senha" placeholder="Digite sua senha secreta">
+
+                            <label class="subtitle mt-2" for="#">Tipo de Usuario</label>
+                            <div class="d-flex align-items-center">
+                                <label for="radio-admin" class="d-flex align-items-center">Administrador<i id="i-admin" class="material-icons ml-1 mt-1">radio_button_unchecked</i></label>
+                                <input id="radio-admin" name="tipoUsuario" type="radio" class="d-none">
+
+                                <label for="radio-caixa" class="ml-3 d-flex align-items-center">Caixa<i id="i-caixa" class="material-icons ml-1 mt-1">radio_button_unchecked</i></label>
+                                <input id="radio-caixa" name="tipoUsuario" type="radio" class="d-none">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btnSave mt-2">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/popper.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/usuarios.js"></script>
+</body>
+
+</html>
