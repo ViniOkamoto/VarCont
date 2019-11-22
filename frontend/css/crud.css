@@ -26,6 +26,16 @@ h1, h2, h3, h4, h5 {
     margin: 0;
 }
 
+h1 {
+    font: 28px filsonbold;
+    text-transform: uppercase;
+}
+
+.h2{
+    font: 20px;
+    color: #ea6900;
+}
+
 header {
     padding: 15px;
     background-color: #ea6900;
@@ -37,6 +47,7 @@ header {
 
 header i{
     font-size: 28px !important;
+    cursor: pointer;
 }
 
 #logo {
@@ -44,23 +55,18 @@ header i{
     margin: 5px 0 0 18px;
 }
 
-h3 {
-    font-family: filsonbold;
-    text-transform: uppercase;
-}
-
 .btnAdd {
+    background-color: white;
     width: 35px;
     height: 35px;
-    background-color: white;
+    font: 35px filsonbold;
     text-transform: uppercase;
     box-shadow:  0 1px 5px rgba(0, 0, 0, 0.15);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 35px;
-    font-family: filsonbold;
+    cursor: pointer;
 }
 
 .card-item {
@@ -68,8 +74,4 @@ h3 {
     background-color: white;
     border-radius: 4px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.card-item h5{
-    color: #ea6900;
 }
