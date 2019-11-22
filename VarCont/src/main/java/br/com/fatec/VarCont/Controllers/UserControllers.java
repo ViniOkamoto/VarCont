@@ -33,7 +33,7 @@ public class UserControllers {
 	private UsuarioService serviceUsuario;
 
 
-	@GetMapping(path = "/caixa")
+	@GetMapping(path = "/usuario")
 	public ResponseEntity<Object> buscarCaixa(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("login");
 		if (usuario != null) {
@@ -46,7 +46,7 @@ public class UserControllers {
 
 	}
 
-	@GetMapping("caixa/{id}")
+	@GetMapping("usuario/{id}")
 	public ResponseEntity<Object> buscarCaixaId(@PathVariable(name = "id", required = true) Long id, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("login");
@@ -65,7 +65,7 @@ public class UserControllers {
 		
 	}
 
-	@PostMapping("caixa/criar")
+	@PostMapping("usuario/criar")
 	public ResponseEntity<Object> criarCaixa(@Valid @RequestBody UsuarioResource usuarioResource, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("login");
@@ -84,7 +84,7 @@ public class UserControllers {
 	}
 	}
 
-	@DeleteMapping("caixa/{id}")
+	@DeleteMapping("usuario/{id}")
 	public ResponseEntity<Object> deleteCaixa(@PathVariable(name = "id", required = true) Long id, HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("login");
@@ -102,7 +102,7 @@ public class UserControllers {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}	
 }
-	@PutMapping("caixa/{id}")
+	@PutMapping("usuario/{id}")
 	public ResponseEntity<Object> alterarCaixa(@PathVariable Long id, @RequestBody Usuario usuario,
 			HttpSession session) {
 		try {
