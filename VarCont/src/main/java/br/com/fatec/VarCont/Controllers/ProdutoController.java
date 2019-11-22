@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping (path = "admin")
 public class ProdutoController {
     
       
@@ -36,9 +35,6 @@ public class ProdutoController {
     {		Usuario usuario = (Usuario) session.getAttribute("login");
 			//Confere sessão
 			if (usuario != null) {
-				if(usuario.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
-				}
 				return ResponseEntity.ok(serviceProduto.buscarProduto());
 			}
 			return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");

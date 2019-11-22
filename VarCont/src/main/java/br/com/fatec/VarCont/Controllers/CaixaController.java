@@ -32,7 +32,7 @@ public class CaixaController {
 	@Autowired
 	private VendaService serviceVenda;
 
-	@GetMapping("estoque")
+	@GetMapping
 	public ResponseEntity<Object> listarLote(HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("login");

@@ -1,5 +1,6 @@
 package br.com.fatec.VarCont.Controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,5 +39,14 @@ public class SessionController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		return null;
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request) {
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate();
+	    }
+	    return "redirect:/login";  //Where you go after logout here.
 	}
 }

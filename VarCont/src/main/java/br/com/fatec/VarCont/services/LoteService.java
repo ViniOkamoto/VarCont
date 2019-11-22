@@ -26,7 +26,19 @@ public class LoteService {
 		Optional<Lote> optionalLote = loteRepository.findById(id);
 		return optionalLote;
 	}
+	
+	
+	public void cadastrarLote(LoteResource loteResource) {
+		try {
+			LOG.info("Serviço para criar lote, sendo executado");
+			Lote lote = serviceConversor.conversor(loteResource);
+			loteRepository.saveAndFlush(lote);
+		} catch (LoteResourceException e) {
+			LOG.error("Erro em salvar o lote " + e.getMessage(), e);
+		}
+	}
 
+	
 	public List<Lote> buscarLote() {
 
 		LOG.info("Serviço para buscar os lotes, sendo executado");
@@ -46,21 +58,18 @@ public class LoteService {
 		return lote;
 	}
 
-	public void cadastrarLote(LoteResource loteResource) {
-		try {
-			LOG.info("Serviço para criar lote, sendo executado");
-			Lote lote = serviceConversor.conversor(loteResource);
-			loteRepository.saveAndFlush(lote);
-		} catch (LoteResourceException e) {
-			LOG.error("Erro em salvar o lote " + e.getMessage(), e);
-		}
-	}
 
-	public void deleteId(Long id) throws LoteNotFoundException {
+	public void deleteId(Long id) throws Exception {
 		Optional<Lote> optionalLote = getOptional(id);
 		if (!optionalLote.isPresent()) {
 			throw new LoteNotFoundException(" Lote não encontrado através do ID: " + id);
 		} else {
+			Lote lote = optionalLote.get();
+			int qtdCompra = lote.getQtdCompra();
+			int qtdVenda = lote.getQtdTotal();
+			if(qtdVenda != qtdCompra) {
+				throw new Exception("Não é possível deletar um lote já utilizado");
+			}
 			LOG.info("Serviço para deletar lote, sendo realizado");
 			loteRepository.delete(optionalLote.get());
 		}

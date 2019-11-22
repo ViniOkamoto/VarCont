@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatec.VarCont.DataSource.Models.Usuario;
@@ -21,7 +20,6 @@ import br.com.fatec.VarCont.exceptions.LoteNotFoundException;
 import br.com.fatec.VarCont.services.LoteService;
 
 @RestController
-@RequestMapping(path = "admin")
 public class LoteController {
 	
 	
@@ -29,37 +27,18 @@ public class LoteController {
 	@Autowired
 	private LoteService serviceLote;
 	
-	@GetMapping
+	@GetMapping("estoque")
 	public ResponseEntity<Object> listaEstoques(HttpSession session) {
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("login");
 			//Confere sessão
 			if (usuario != null) {
-				if(usuario.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
-				}
 				return ResponseEntity.ok(serviceLote.listarEstoques());
 			}
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa estar logado");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar os lotes");
 		}
-	}
-	@GetMapping("contabilidade")
-	public ResponseEntity<Object> buscarTabela(HttpSession session){
-		try {
-			Usuario usuario = (Usuario) session.getAttribute("login");
-			//Confere sessão
-			if (usuario != null) {
-				if(usuario.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
-				}
-				return ResponseEntity.ok(serviceLote.buscarLote());
-			}
-			return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar os lotes");
-		}	
 	}
 	
 	@GetMapping("lote")
@@ -113,7 +92,7 @@ public class LoteController {
 	}
 	
 	@DeleteMapping("lote/{id}")
-	public ResponseEntity<Object> deletarId(@PathVariable(name = "id", required = true) Long id, HttpSession session ) throws LoteNotFoundException{
+	public ResponseEntity<Object> deletarLote(@PathVariable(name = "id", required = true) Long id, HttpSession session ) throws LoteNotFoundException{
 		try {
 			Usuario usuario = (Usuario) session.getAttribute("login");
 			//Confere sessão
