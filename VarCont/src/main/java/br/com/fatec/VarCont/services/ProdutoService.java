@@ -43,9 +43,8 @@ public class ProdutoService {
 		Produto produto = null;
 		if (!optionalProduto.isPresent()) {
 			throw new ProdutoNotFoundException(" Produto não encontrado através do ID: " + id);
-		} else {
-			produto = optionalProduto.get();
-		}
+		} 	
+		produto = optionalProduto.get();
 		LOG.info("Serviço para buscar caixa, sendo executado");
 		return produto;
 	}
@@ -72,5 +71,13 @@ public class ProdutoService {
        
 	
 }
-    
+    public void alterarProduto(Long id, Produto produto) throws ProdutoNotFoundException {
+    	Optional<Produto> produtoOptional = produtoRepository.findById(id);
+    	if(!produtoOptional.isPresent()) {
+    		throw new ProdutoNotFoundException("O produto não existe");
+    	}else {
+    		produto.setIdProduto(id);
+    		produtoRepository.saveAndFlush(produto);    		
+    	} 	   
+    }
 }

@@ -1,22 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.fatec.VarCont.Controllers;
 
 import br.com.fatec.VarCont.DataSource.Models.Produto;
-import br.com.fatec.VarCont.Repository.ProdutoRepository;
+import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import br.com.fatec.VarCont.Resource.Models.ProdutoResource;
 import br.com.fatec.VarCont.exceptions.ProdutoNotFoundException;
-import br.com.fatec.VarCont.exceptions.UsuarioNotFoundException;
 import br.com.fatec.VarCont.services.ProdutoService;
-import java.util.List;
-import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,48 +30,97 @@ public class ProdutoController {
     @Autowired
     private ProdutoService serviceProduto;
     
-    @Autowired
-    private ProdutoRepository produtoRepository;
     
     @GetMapping ("produto")
-    public List<Produto> buscarProduto()
-    {
-        return serviceProduto.buscarProduto();
-    }
+    public ResponseEntity<Object> buscarProduto(HttpSession session)
+    {		Usuario usuario = (Usuario) session.getAttribute("login");
+			//Confere sessão
+			if (usuario != null) {
+				if(usuario.isAdmin() != true) {
+					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
+				}
+				return ResponseEntity.ok(serviceProduto.buscarProduto());
+			}
+			return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
+		
+	}
+	
     
     @GetMapping("produto/{id}")
-	public Produto buscarProdutoId(@PathVariable(name = "id", required = true) Long id) throws ProdutoNotFoundException {
-		return serviceProduto.buscarId(id);
+	public ResponseEntity<Object> buscarProdutoId(@PathVariable(name = "id", required = true) Long id,HttpSession session){
+	try {	Usuario usuario = (Usuario) session.getAttribute("login");
+		//Confere sessão
+		if (usuario != null) {
+			if(usuario.isAdmin() != true) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
+			}
+			return ResponseEntity.ok(serviceProduto.buscarId(id));
+		}
+		return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
+	} catch (Exception e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}
+    }
     
     @PostMapping("produto/criar")
-	public void criarProduto(@Valid @RequestBody ProdutoResource produtoResource) {
-
-		serviceProduto.cadastrarProduto(produtoResource);
+	public ResponseEntity<Object> criarProduto(@Valid @RequestBody ProdutoResource produtoResource,HttpSession session) {
+		try {
+			Usuario usuario = (Usuario) session.getAttribute("login");
+			//Confere sessão
+			if (usuario != null) {
+				if(usuario.isAdmin() != true) {
+					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
+				}
+				serviceProduto.cadastrarProduto(produtoResource);
+				return ResponseEntity.ok(null);
+			}
+			return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+		}
 	}
     
     @DeleteMapping("produto/{id}")
-	public void deleteProdutoId(@PathVariable(name = "id", required = true) Long id) throws UsuarioNotFoundException, ProdutoNotFoundException {
-		serviceProduto.deleteId(id);
+	public ResponseEntity<Object> deleteProdutoId(@PathVariable(name = "id", required = true) Long id, HttpSession session) throws  ProdutoNotFoundException {
+		try {
+			Usuario usuario = (Usuario) session.getAttribute("login");
+			//Confere sessão
+			if (usuario != null) {
+				if(usuario.isAdmin() != true) {
+					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
+				}
+				serviceProduto.deleteId(id);
+				return ResponseEntity.ok(null);
+			}
+			return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+		}
 	}
     
     @PutMapping("produto/{id}")
-    public ResponseEntity<Produto> alterarProduto(@PathVariable(name = "id", required = true) Long id,@Valid @RequestBody Produto produto){
-    	
-    	Optional<Produto> produtoOptional = produtoRepository.findById(id);
-    	if(!produtoOptional.isPresent()) {
-    		return ResponseEntity.notFound().build();
-    	}else {
-    		produto.setIdProduto(id);
-    		produtoRepository.saveAndFlush(produto);
-    		
-    		return ResponseEntity.noContent().build();
-    	} 	    	
-    };
+    public ResponseEntity<Object> alterarProduto(@PathVariable(name = "id", required = true) Long id,@Valid @RequestBody Produto produto, HttpSession session){
+    	try {
+			Usuario usuario = (Usuario) session.getAttribute("login");
+			//Confere sessão
+			if (usuario != null) {
+				if(usuario.isAdmin() != true) {
+					return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
+				}
+				serviceProduto.alterarProduto(id, produto);
+				return ResponseEntity.ok(null);
+			}
+			return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+		}
+	}
+	 	    	
+    }
 
 
     
     
     
     
-}
+
