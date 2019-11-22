@@ -31,7 +31,7 @@ formSubmit.submit(function(form){
         buttonLogin.text('Login');
         inputPassword.val('');
     }, function(erro){
-        if (erro.status == 400) {
+        if (erro.response.status == 400) {
             const toast = { title: 'Erro no Login', message: 'Usuario ou senha inválidos, tente novamente.', delay: 3000 };
             NewToast(toast);
         } else {
