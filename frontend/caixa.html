@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+
+    <link rel="icon" type="imagem/png" href="assets/icon.png" />
+    <title>VarCont | Dashboard</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="d-flex align-items-center">
+        <i class="material-icons">menu</i>
+        <img src="assets/logo-branca.png" id="logo" alt="Logo" />
+      </div>
+      <i class="material-icons">more_vert</i>
+    </header>
+
+    <div class="container-fluid p-4">
+      <div class="row mb-3">
+        <div class="col d-flex justify-content-between align-items-center px-4">
+          <h1 id="sectionTitle">Caixa</h1>
+        </div>
+      </div>
+      <div class="col d-flex">
+        <div class="col-5 align-items-center">
+          <div class="card-item p-3">
+            <h3>Estoques disponíveis</h3>
+            <div class=" row d-flex justify-content-center mb-3">
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-7">
+          <div class="card-item p-3">
+            <h3>Venda</h3>
+              <form>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Produtos</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <div class= "col"> 
+                      <label for="staticEmail" class="col-form-label">Custo Unitario</label>
+                      <input class="form-control" type="text" placeholder="4.50" readonly>
+                  </div>
+                  <div>
+                      <label for="staticEmail" class="col-form-label">Quantidade no Estoque</label>
+                      <input class="form-control" type="text" placeholder="400" readonly>
+                  </div>
+                </div>
+                <form class ="form-row">
+                    <div class= "col"> 
+                        <label for="staticEmail" class="col-form-label">Quantidade desejada</label>
+                        <input type="range" class="custom-range" min="0" max="5" id="customRange2">
+                    </div>
+                    <div>
+                        <label for="staticEmail" class="col-form-label">Total(R$)</label>
+                        <input class="form-control" type="text" placeholder="100.00" readonly>
+                    </div>
+                        <div class="d-flex justify-content-flex-end">
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                      </div>
+                </form>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="js/grafico.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/popper.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+  </body>
+</html>

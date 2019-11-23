@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fatec.VarCont.DataSource.Models.Usuario;
+import br.com.fatec.VarCont.Repository.UsuarioRepository;
 import br.com.fatec.VarCont.Resource.Models.UsuarioResource;
 import br.com.fatec.VarCont.services.UsuarioService;
 import br.com.fatec.VarCont.services.UsuarioConversor;
@@ -19,11 +19,13 @@ import br.com.fatec.VarCont.services.UsuarioConversor;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 @RestController
-@RequestMapping(value = "admin")
+@RequestMapping
 public class UserControllers {
 
 	@Autowired
@@ -32,33 +34,19 @@ public class UserControllers {
 	@Autowired
 	private UsuarioService serviceUsuario;
 
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@GetMapping(path = "/usuario")
-	public ResponseEntity<Object> buscarCaixa(HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("login");
-		if (usuario != null) {
-			if(usuario.isAdmin() != true) {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa ser Admin para realizar essa ação");
-			}
+	public ResponseEntity<Object> buscarUsuario(@CookieValue(value = "login", required = false ) String numero) {
 			return ResponseEntity.ok(serviceUsuario.buscarUsuario());
-		}
-		return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Você precisa estar logado");
 
 	}
 
 	@GetMapping("usuario/{id}")
 	public ResponseEntity<Object> buscarCaixaId(@PathVariable(name = "id", required = true) Long id, HttpSession session) {
 		try {
-			Usuario usuario = (Usuario) session.getAttribute("login");
-			// Confere sessão
-			if (usuario != null) {
-				if (usuario.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-							.body("Você precisa ser Admin para realizar essa ação");
-				}
 				return ResponseEntity.ok(serviceUsuario.buscarId(id));
-			}
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa estar logado");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}
@@ -68,55 +56,27 @@ public class UserControllers {
 	@PostMapping("usuario/criar")
 	public ResponseEntity<Object> criarCaixa(@Valid @RequestBody UsuarioResource usuarioResource, HttpSession session) {
 		try {
-			Usuario usuario = (Usuario) session.getAttribute("login");
-			// Confere sessão
-			if (usuario != null) {
-				if (usuario.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-							.body("Você precisa ser Admin para realizar essa ação");
-				}
 				serviceUsuario.cadastrarUsuario(usuarioResource);
 				return ResponseEntity.ok(null);
-			}
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa estar logado");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 	}
 	}
 
 	@DeleteMapping("usuario/{id}")
-	public ResponseEntity<Object> deleteCaixa(@PathVariable(name = "id", required = true) Long id, HttpSession session) {
+	public ResponseEntity<Object> deleteCaixa(@PathVariable(name = "id", required = true) Long id ) {
 		try {
-			Usuario usuario = (Usuario) session.getAttribute("login");
-			// Confere sessão
-			if (usuario != null) {
-				if (usuario.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-							.body("Você precisa ser Admin para realizar essa ação");
-				}
 				serviceUsuario.deletarId(id);
 				return ResponseEntity.ok(null);
-			}
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa estar logado");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
 	}	
 }
 	@PutMapping("usuario/{id}")
-	public ResponseEntity<Object> alterarCaixa(@PathVariable Long id, @RequestBody UsuarioResource usuarioResource,
-			HttpSession session) {
+	public ResponseEntity<Object> alterarCaixa(@PathVariable Long id, @RequestBody UsuarioResource usuarioResource) {
 		try {
-			Usuario usuarioSessão = (Usuario) session.getAttribute("login");
-			// Confere sessão
-			if (usuarioSessão != null) {
-				if (usuarioSessão.isAdmin() != true) {
-					return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-							.body("Você precisa ser Admin para realizar essa ação");
-				}
 				serviceUsuario.alterarUsuario(usuarioResource, id);
 				return ResponseEntity.ok("Usuario alterado");
-			}
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você precisa estar logado");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 		}
