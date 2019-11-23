@@ -18,7 +18,7 @@ function NewToast(toast) {
         '<div class="toast" role="alert" style="font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif" aria-live="assertive" aria-atomic="true" ' + prop + '>' +
             '<div class="toast-header">' +
                 '<strong class="mr-auto">' + toast.title + '</strong>' +
-                '<small class="text-muted">Agora</small>' +
+                '<small class="text-muted ml-2">Agora</small>' +
                 '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fechar">' +
                     '<span aria-hidden="true">&times;</span>' +
                 '</button>' +
