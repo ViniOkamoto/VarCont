@@ -2,7 +2,7 @@
 function NewToast(toast) {
     if ($('#toast-place').length === 0) {     
         $('body').prepend(
-            '<div aria-live="polite" style="z-index: 5" aria-atomic="true" class="position-relative">' +
+            '<div aria-live="polite" style="z-index: 2000" aria-atomic="true" class="position-relative">' +
                 '<div class="position-absolute p-3" id="toast-place" style="top:0; right:0;"></div>' +
             '</div>'
         )   
