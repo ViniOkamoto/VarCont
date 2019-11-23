@@ -91,6 +91,7 @@ function listUsers() {
 }
 
 $('#user-modal').on('show.bs.modal', function (e) {
+    updateRadio();
     const button = $(e.relatedTarget);
     const modal = $(this);
     $('#id-user').val(button.data('id'));
@@ -140,7 +141,7 @@ $('.btnSave').click(function () {
         
         const api = ApiUsuario();
 
-        if ($('#id-user') == '') {
+        if ($('#id-user').val() != '') {
             user.id = $('#id-user');
             api.Alterar(user, function(response){
                 const toast = {
