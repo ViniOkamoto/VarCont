@@ -32,10 +32,11 @@ function onChangeRadios() {
 
 function expandCardEvent() {
     const headerCard = $('.header-card');
-    const bodyCard = $('.body-card')
-    const expandIcon = $('.expand')
 
     headerCard.click(function (e) {
+        let bodyCard = $(this).parent().find('.body-card');
+        let expandIcon = $(this).find('.expand');
+        
         if (bodyCard.hasClass('d-none')) {
             bodyCard.removeClass('d-none');
             expandIcon.text('expand_less')
@@ -51,7 +52,7 @@ function listUsers(){
     api = ApiUsuario();
     api.Listar(function(response){
         response.data.forEach(user => {
-            user.admin = (user.admin) ? 'administrador' : 'caixa';
+            user.admin = (user.admin) ? 'Administrador' : 'caixa';
             let html = '<div class="card-item p-3 mb-3">' +
                 '<div class="header-card cursor-pointer d-flex justify-content-between align-items-center">' +
                     '<h2>' + user.nome + '</h2>' +
