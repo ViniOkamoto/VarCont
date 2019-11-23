@@ -37,13 +37,22 @@ public class VendaService {
 		return listaVenda;
 	}
 	
-	public void criarVenda(VendaResource vendaResource, Long id) {
+	public void criarVenda(VendaResource vendaResource) {
 		try {
 			LOG.info("Serviço de criação de venda, sendo executado");
-			Venda venda = serviceConversor.conversor(vendaResource, id);
+			Venda venda = serviceConversor.conversor(vendaResource);
 			vendaRepository.saveAndFlush(venda);
 		}catch(VendaResourceException e){
 			LOG.error("Erro em salvar o produto" + e.getMessage(), e);
 		}
 	}
+//	public void deletarId(Long id) {
+//		try {
+//			LOG.info("Serviço de criação de venda, sendo executado");
+//			Venda venda = serviceConversor.conversor(vendaResource);
+//			vendaRepository.saveAndFlush(venda);
+//		}catch(VendaResourceException e){
+//			LOG.error("Erro em salvar o produto" + e.getMessage(), e);
+//		}
+//	}
 }

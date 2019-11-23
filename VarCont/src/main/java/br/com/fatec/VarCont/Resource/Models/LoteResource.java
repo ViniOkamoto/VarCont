@@ -11,14 +11,10 @@ public class LoteResource {
 	@JsonProperty("lote_qtdCompra")
 	private String qtdCompra;
 	
-	@JsonProperty("lote_qtdTotal")
-	private String qtdTotal;
-
 
 	public LoteResource(Long idProduto, String qtdCompra, String qtdTotal) {
 		this.idProduto = idProduto;
 		this.qtdCompra = qtdCompra;
-		this.qtdTotal = qtdTotal;
 	}
 
 
@@ -51,24 +47,9 @@ public class LoteResource {
 
 
 
-
-	public String getQtdTotal() {
-		return qtdTotal;
-	}
-
-
-
-
-	public void setQtdTotal(String qtdTotal) {
-		this.qtdTotal = qtdTotal;
-	}
-
-
-
-
 	@Override
 	public String toString() {
-		return "LoteResource [idProduto=" + idProduto + ", qtdCompra=" + qtdCompra + ", qtdTotal=" + qtdTotal + "]";
+		return "LoteResource [idProduto=" + idProduto + ", qtdCompra=" + qtdCompra + "]";
 	}
 
 }

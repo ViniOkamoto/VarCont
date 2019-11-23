@@ -21,6 +21,11 @@ public class ProdutoConversor {
 
 		try {
 			Produto produto = new Produto();
+			double compra = produtoResource.getValorCompra();
+			double venda = produtoResource.getValorVenda();
+			if(compra >= venda) {
+				throw new Exception("O valor de venda não pode ser menor, ou igual, ao valor de compra produto");
+			}
 			produto.setNomeProd(produtoResource.getNomeProd());
 			produto.setValorCompra(produtoResource.getValorCompra());
 			produto.setValorVenda(produtoResource.getValorVenda());
@@ -28,7 +33,7 @@ public class ProdutoConversor {
 
 		} catch (Exception e) {
 			throw new ProdutoResourceException(
-					"Falha ao converter o resource para entidade, resource: " + produtoResource);
+					"Falha ao converter o resource para entidade, resource: " + produtoResource + " :" + e );
 		}
 	}
 

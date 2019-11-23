@@ -31,12 +31,27 @@ public class ProdutoService {
     	return optionalProduto;
     } 
     
+    
+    public void cadastrarProduto(ProdutoResource produtoResource){
+    	try {
+    		LOG.info("Serviço para criar caixa, sendo executado");
+    		Produto produto = serviceConversor.conversor(produtoResource);
+    		produtoRepository.saveAndFlush(produto);
+    		
+    	} catch (ProdutoResourceException e) {
+    		LOG.error("Erro em salva o produto: " + e.getMessage(), e);
+    	}
+    	
+    }
+
+    
     public List<Produto> buscarProduto()
     {
         LOG.info ("Serviço para buscar os Produtos sendo executado");
         List<Produto> listaProdutos = produtoRepository.findAll();
         return listaProdutos;
     }
+    
     
     public Produto buscarId(Long id) throws ProdutoNotFoundException {
 		Optional<Produto> optionalProduto = getOptional(id);
@@ -48,29 +63,8 @@ public class ProdutoService {
 		LOG.info("Serviço para buscar caixa, sendo executado");
 		return produto;
 	}
-    
-    public void deleteId(Long id) throws ProdutoNotFoundException {
-		Optional<Produto> optionalProduto = getOptional(id);
-		if (!optionalProduto.isPresent()) {
-			throw new ProdutoNotFoundException(" Produto não encontrado através do ID: " + id);
-		} else {
-			LOG.info("Serviço para buscar caixa, sendo executado");
-			produtoRepository.delete(optionalProduto.get());
-		}
-	}
-
-	public void cadastrarProduto(ProdutoResource produtoResource){
-	try {
-		LOG.info("Serviço para criar caixa, sendo executado");
-		Produto produto = serviceConversor.conversor(produtoResource);
-    	produtoRepository.saveAndFlush(produto);
-
-	} catch (ProdutoResourceException e) {
-		LOG.error("Erro em salva o produto: " + e.getMessage(), e);
-	}
-       
 	
-}
+	
     public void alterarProduto(Long id, Produto produto) throws ProdutoNotFoundException {
     	Optional<Produto> produtoOptional = produtoRepository.findById(id);
     	if(!produtoOptional.isPresent()) {
@@ -79,5 +73,16 @@ public class ProdutoService {
     		produto.setIdProduto(id);
     		produtoRepository.saveAndFlush(produto);    		
     	} 	   
+    }
+    
+    
+    public void deleteId(Long id) throws ProdutoNotFoundException {
+    	Optional<Produto> optionalProduto = getOptional(id);
+    	if (!optionalProduto.isPresent()) {
+    		throw new ProdutoNotFoundException(" Produto não encontrado através do ID: " + id);
+    	} else {
+    		LOG.info("Serviço para buscar caixa, sendo executado");
+    		produtoRepository.delete(optionalProduto.get());
+    	}
     }
 }

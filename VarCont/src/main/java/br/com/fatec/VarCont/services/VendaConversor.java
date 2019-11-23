@@ -27,13 +27,13 @@ public class VendaConversor {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-	public Venda conversor(VendaResource vendaResource, Long id) throws VendaResourceException {
+	public Venda conversor(VendaResource vendaResource) throws VendaResourceException {
 
 		try {
 			int qtd = checkInt(vendaResource.getQtdVenda());
 			checkEstoque(vendaResource.getIdProduto(), qtd);
 			Optional<Lote> optionalLote = loteRepository.findByPepsProximo(vendaResource.getIdProduto());
-			Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+			Optional<Usuario> optionalUsuario = usuarioRepository.findById(vendaResource.getIdUsuario());
 			Optional<Produto> optionalProduto = produtoRepository.findById(vendaResource.getIdProduto());
 			Produto produto = new Produto();
 			produto = optionalProduto.get();
