@@ -24,6 +24,8 @@ public interface LoteRepository extends JpaRepository<Lote, Long>{
 	@Query( value = "SELECT * from tbl_lote WHERE prod_id = :prod_id and lote_data <= now() and lote_qtd_total > 0 ORDER BY lote_data DESC limit 1  ", nativeQuery = true)
 	Optional<Lote> findByPepsProximo(@Param("prod_id") Long id);
 	
+	@Query(value = "select * from tbl_lote where prod_id = :prod_id and lote_data <= now() and lote_qtd_total < lote_qtd_compra ORDER BY lote_data DESC limit 1", nativeQuery = true)
+	Optional<Lote> findLoteUsado(@Param("prod_id") Long id);
 	@Transactional
 	@Modifying
 	@Query(value = "UPDATE tbl_lote SET lote_qtd_total = :qtd_total where lote_id = :id", nativeQuery= true)
