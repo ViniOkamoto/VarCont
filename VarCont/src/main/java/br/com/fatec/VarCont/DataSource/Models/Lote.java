@@ -35,7 +35,7 @@ public class Lote implements Serializable {
 	private int qtdCompra;
 
 	@Column(name = "lote_qtdTotal")
-	private int qtdTotal;
+	private int qtdTotal; 
 
 	public long getId() {
 		return id;

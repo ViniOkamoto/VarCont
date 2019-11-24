@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/crud.css">
+  <link rel="stylesheet" href="css/modal.css">
+
+  <link rel="icon" type="imagem/png" href="assets/icon.png" />
+  <title>VarCont | Dashboard</title>
+</head>
+
+<body>
+  <header>
+    <div class="d-flex align-items-center">
+      <i class="material-icons">menu</i>
+      <img src="assets/logo-branca.png" id="logo" alt="Logo">
+    </div>
+    <i class="material-icons">more_vert</i>
+  </header>
+
+  <div class="container-fluid p-4">
+    <div class="row mb-3">
+      <div class="col d-flex justify-content-between align-items-center px-4">
+        <h1 id="sectionTitle">PRODUTOS</h1>
+        <div class="btnAdd" data-toggle="modal" data-target="#produto-modal">+</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col list-produtos">
+        <div class="card-item p-3 mb-3">
+          <div class="header-card cursor-pointer d-flex justify-content-between align-items-center">
+            <h2> Maçã </h2>
+            <i class="material-icons expand">expand_more</i>
+          </div>
+          <div class="body-card d-none">
+            <div class="d-flex justify-content-between align-items-end">
+              <div class="d-flex flex-column mt-3">
+                <h3>Custo Entrada:</h3>
+                <div class="dataInfo mb-2"> 2.00 </div>
+                <h3>Custo Saída:</h3>
+                <div class="dataInfo mb-2"> 3.00 </div>
+              </div>
+              <button class="btnEdit" data-id=" produto.id " data-toggle="modal"
+                data-target="#edit-modal">Editar</button>
+            </div>
+          </div>
+        </div>;
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="produto-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 3px; border: 0;">
+          <div class="header-modal d-flex align-items-center justify-content-between">
+            <span></span>
+            <h1>Produto</h1>
+            <a data-dismiss="modal" style="cursor: pointer;" class="mr-2">X</a>
+          </div>
+          <div class="content-modal">
+            <div class="title d-flex align-items-center pb-2">
+              <i class="material-icons">
+                account_circle
+              </i>
+              <div class="ml-2">Dados do Produto</div>
+            </div>
+            <div class="d-flex flex-column">
+              <input type="hidden" id="id-produto">
+
+              <label class="subtitle" for="produto-nome">Nome do Produto</label>
+              <input id="produto-nome" placeholder="Digite o nome do produto">
+              <div class="row d-flex justify-content-start mt-3 mb-3">
+                <div class="col">
+                  <label class="subtitle" for="custo-entrada">Custo Entrada</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Quantia">
+                    <div class="input-group-append">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <label class="subtitle" for="custo-entrada">Custo Entrada</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Quantia">
+                    <div class="input-group-append">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btnSave mt-2">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/popper.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/axios.js"></script>
+  <script type="text/javascript" src="js/toast.js"></script>
+  <script type="text/javascript" src="js/api.js"></script>
+  <script type="text/javascript" src="js/produtos.js"></script>
+</body>
+
+</html>

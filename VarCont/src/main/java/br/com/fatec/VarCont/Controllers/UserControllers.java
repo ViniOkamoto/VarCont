@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fatec.VarCont.Repository.UsuarioRepository;
 import br.com.fatec.VarCont.Resource.Models.UsuarioResource;
 import br.com.fatec.VarCont.services.UsuarioService;
 import br.com.fatec.VarCont.services.UsuarioConversor;
@@ -19,7 +18,6 @@ import br.com.fatec.VarCont.services.UsuarioConversor;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,11 +32,9 @@ public class UserControllers {
 	@Autowired
 	private UsuarioService serviceUsuario;
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 
 	@GetMapping(path = "/usuario")
-	public ResponseEntity<Object> buscarUsuario(@CookieValue(value = "login", required = false ) String numero) {
+	public ResponseEntity<Object> buscarUsuario() {
 			return ResponseEntity.ok(serviceUsuario.buscarUsuario());
 
 	}
