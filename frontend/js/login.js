@@ -38,5 +38,6 @@ formSubmit.submit(function(form){
             const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.'};
             NewToast(toast);
         }
+        console.log(erro);
     })
 })

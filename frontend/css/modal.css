@@ -27,7 +27,6 @@ label {
     border-right: none;
     border-top: none;
     border-left: none;
-    color: #929292;
     border-bottom: 1px solid #EE9A00;
 }
 
@@ -48,8 +47,7 @@ label {
     font-weight: 500;
 }
 
-label[for="radio-admin"], label[for="radio-caixa"]{
-    color: #797979;
+label[for="radio-admin"], label[for="radio-caixa"]{ 
     cursor: pointer;
 }
 
