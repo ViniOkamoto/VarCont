@@ -159,3 +159,41 @@ function ApiLote() {
 
     return api;
 }
+
+function ApiVenda() {
+    var api = new Object;
+
+    api.Adicionar = function (lot, onSuccess, onBeforeSend, onComplete, onError) {
+        onBeforeSend();
+        axios.post(baseUrlApi + 'venda/criar', lot)
+            .then(function (response) { onSuccess(response) })
+            .catch(function (error) { onError(error) })
+            .finally(function () { onComplete() });
+    }
+
+    api.Listar = function (onSuccess, onBeforeSend, onComplete, onError) {
+        onBeforeSend();
+        axios.get(baseUrlApi + 'venda/')
+            .then(function (response) { onSuccess(response) })
+            .catch(function (error) { onError(error) })
+            .finally(function () { onComplete() });
+    }
+
+    api.Consultar = function (id, onSuccess, onBeforeSend, onComplete, onError) {
+        onBeforeSend();
+        axios.get(baseUrlApi + 'venda/' + id)
+            .then(function (response) { onSuccess(response) })
+            .catch(function (error) { onError(error) })
+            .finally(function () { onComplete() });
+    }
+
+    api.Excluir = function (id, onSuccess, onBeforeSend, onComplete, onError) {
+        onBeforeSend();
+        axios.delete(baseUrlApi + 'venda/' + id)
+            .then(function (response) { onSuccess(response) })
+            .catch(function (error) { onError(error) })
+            .finally(function () { onComplete() });
+    }
+
+    return api;
+}
