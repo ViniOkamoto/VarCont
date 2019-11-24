@@ -24,7 +24,7 @@ function ApiUsuario() {
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });
     }
-    
+
     api.Listar = function (onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
         axios.get(baseUrlApi + 'usuario/')
@@ -51,7 +51,7 @@ function ApiUsuario() {
 
     api.Excluir = function (id, onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
-        axios.put(baseUrlApi + 'usuario/' + id)
+        axios.delete(baseUrlApi + 'usuario/' + id)
             .then(function (response) { onSuccess(response) })
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });
@@ -70,7 +70,7 @@ function ApiProduto() {
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });
     }
-    
+
     api.Listar = function (onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
         axios.get(baseUrlApi + 'produto/')
@@ -97,7 +97,7 @@ function ApiProduto() {
 
     api.Excluir = function (id, onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
-        axios.put(baseUrlApi + 'produto/' + id)
+        axios.delete(baseUrlApi + 'produto/' + id)
             .then(function (response) { onSuccess(response) })
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });
@@ -116,10 +116,18 @@ function ApiLote() {
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });
     }
-    
+
     api.Listar = function (onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
         axios.get(baseUrlApi + 'lote/')
+            .then(function (response) { onSuccess(response) })
+            .catch(function (error) { onError(error) })
+            .finally(function () { onComplete() });
+    }
+
+    api.Estoque = function (onSuccess, onBeforeSend, onComplete, onError) {
+        onBeforeSend();
+        axios.get(baseUrlApi + 'estoque/')
             .then(function (response) { onSuccess(response) })
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });
@@ -143,7 +151,7 @@ function ApiLote() {
 
     api.Excluir = function (id, onSuccess, onBeforeSend, onComplete, onError) {
         onBeforeSend();
-        axios.put(baseUrlApi + 'lote/' + id)
+        axios.delete(baseUrlApi + 'lote/' + id)
             .then(function (response) { onSuccess(response) })
             .catch(function (error) { onError(error) })
             .finally(function () { onComplete() });

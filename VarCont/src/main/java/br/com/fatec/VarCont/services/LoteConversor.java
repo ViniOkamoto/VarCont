@@ -18,7 +18,7 @@ public class LoteConversor {
 	public Lote conversor (LoteResource loteResource) throws LoteResourceException{
 		
 		try {
-			Optional<Produto> optionalProduto = produtoRepository.getById(loteResource.getIdProduto());
+			Optional<Produto> optionalProduto = produtoRepository.findById(loteResource.getIdProduto());
 			Produto produto = new Produto();
 			produto = optionalProduto.get();
 			Lote lote = new Lote();
