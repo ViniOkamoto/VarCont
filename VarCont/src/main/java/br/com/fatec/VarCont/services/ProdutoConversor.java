@@ -18,7 +18,6 @@ import br.com.fatec.VarCont.Resource.Models.ProdutoResource;
 @Component
 public class ProdutoConversor {
 	public Produto conversor(ProdutoResource produtoResource) throws ProdutoResourceException {
-
 		try {
 			Produto produto = new Produto();
 			double compra = produtoResource.getValorCompra();
