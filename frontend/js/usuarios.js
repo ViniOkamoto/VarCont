@@ -72,7 +72,11 @@ function listUsers() {
                 '<h3>Tipo de Usuário</h3>' +
                 '<div class="dataInfo">' + user.admin + '</div>' +
                 '</div>' +
-                '<button class="btnEdit" data-id="' + user.id + '" data-toggle="modal" data-target="#user-modal">Editar</button>' +
+                '<div class="d-flex">' +
+                '<button class="btnEdit d-flex align-items-center" data-id="' + user.id + '" data-toggle="modal"' +
+                    'data-target="#user-modal"><i class="material-icons">edit</i></button>' +
+                '<button class="btnDel d-flex align-items-center ml-2" data-id="' + user.id + '"><i class="material-icons">delete</i></button>' +
+                '</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -81,6 +85,7 @@ function listUsers() {
         })
         $('.list-users').html(text);
         expandCardEvent();
+        deleteClickEvent();
     }, function () { }, function () { }, function (error) {
         const toast = {
             title: 'Erro na listagem de usuários',
@@ -183,8 +188,7 @@ $('.btnSave').click(function () {
             }, function (error) {
                 const toast = {
                     title: 'Erro ao adicionar usuário',
-                    message: 'Há um problema com a aplicação, entre em contato com o suporte.',
-                    delay: 4000
+                    message: 'Há um problema com a aplicação, entre em contato com o suporte.'
                 }
                 NewToast(toast);
                 console.log(error);
@@ -192,6 +196,29 @@ $('.btnSave').click(function () {
         }
     }
 })
+
+function deleteClickEvent(){
+    $('.btnDel').click(function(){
+        const id = $(this).data('id');
+        const api = ApiUsuario();
+        api.Excluir(id, function(response){
+            const toast = {
+                title: 'Sucesso',
+                message: 'Usuário excluído com êxito.',
+                delay: 4000
+            }
+            NewToast(toast);
+            listUsers();
+        }, function(){}, function(){}, function(error){
+            const toast = {
+                title: 'Erro ao excluir usuário',
+                message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+            }
+            NewToast(toast);
+            console.log(error);
+        })
+    })
+}
 
 function validateModalFields() {
     let erro = false;
