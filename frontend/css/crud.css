@@ -99,4 +99,7 @@ header i {
 
 .btnDel {
     color: #ea6900;
+    padding: 0;
+    border: none;
+    background-color: transparent;
 }
