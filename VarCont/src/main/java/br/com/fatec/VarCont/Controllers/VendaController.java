@@ -1,6 +1,5 @@
 package br.com.fatec.VarCont.Controllers;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +21,7 @@ public class VendaController {
 	private VendaService serviceVenda;
 
 	@GetMapping("venda")
-	public ResponseEntity<Object> listarVendas(HttpSession session){
+	public ResponseEntity<Object> listarVendas(){
 		try {
 				return ResponseEntity.ok(serviceVenda.buscarVendas());
 		} catch (Exception e) {
@@ -30,7 +30,7 @@ public class VendaController {
 	}
 
 	@PostMapping("venda")
-	public ResponseEntity<Object> cadastrarVenda(@Valid @RequestBody VendaResource vendaResource, HttpSession session) {
+	public ResponseEntity<Object> cadastrarVenda(@Valid @RequestBody VendaResource vendaResource) {
 		try {
 				serviceVenda.criarVenda(vendaResource);
 				return ResponseEntity.ok(null);
@@ -39,13 +39,13 @@ public class VendaController {
 		}
 	}
 	
-//	@DeleteMapping("venda")
-//	public ResponseEntity<Object> deletarVenda(@Valid @RequestBody VendaResource vendaResource, HttpSession session) {
-//		try {
-//				serviceVenda.criarVenda(vendaResource);
-//				return ResponseEntity.ok(null);
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível realizar a venda");
-//		}
-//	}
+	@DeleteMapping("venda/{id}")
+	public ResponseEntity<Object> deletarVenda(@PathVariable(name = "id", required = true) Long id) {
+		try {
+				serviceVenda.deletarId(id);
+				return ResponseEntity.ok(null);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível deletar a venda" + e);
+		}
+	}
 }

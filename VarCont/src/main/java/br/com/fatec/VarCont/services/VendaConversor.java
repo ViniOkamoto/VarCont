@@ -48,7 +48,7 @@ public class VendaConversor {
 				while(qtdConta > 0) {
 					Long loteId = lote.getId();
 					if(antigoTotal >= qtdConta) {
-					antigoTotal -= qtd;
+					antigoTotal -= qtdConta;
 					qtdConta = 0;
 					loteRepository.updateQtdTotal(antigoTotal, loteId);
 				} else {

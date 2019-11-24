@@ -54,6 +54,7 @@ function expandCardEvent() {
 function listUsers() {
     api = ApiUsuario();
     api.Listar(function (response) {
+        let text = "";
         response.data.forEach(user => {
             user.admin = (user.admin) ? 'Administrador' : 'caixa';
             let html = '<div class="card-item p-3 mb-3">' +
@@ -65,13 +66,13 @@ function listUsers() {
                 '<div class="d-flex justify-content-between align-items-end">' +
                 '<div class="d-flex flex-column mt-3">' +
                 '<h3>Email:</h3>' +
-                '<div class="userInfo mb-2">' + user.email + '</div>' +
+                '<div class="dataInfo mb-2">' + user.email + '</div>' +
                 '<h3>Senha:</h3>' +
-                '<div class="userInfo mb-2">' + user.senha + '</div>' +
+                '<div class="dataInfo mb-2">' + user.senha + '</div>' +
                 '<h3>Tipo de Usuário</h3>' +
-                '<div class="userInfo">' + user.admin + '</div>' +
+                '<div class="dataInfo">' + user.admin + '</div>' +
                 '</div>' +
-                '<button class="btnEdit" data-id="' + user.id + '" data-toggle="modal" data-target="#edit-modal">Editar</button>' +
+                '<button class="btnEdit" data-id="' + user.id + '" data-toggle="modal" data-target="#user-modal">Editar</button>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -97,7 +98,7 @@ $('#user-modal').on('show.bs.modal', function (e) {
     $('#id-user').val(button.data('id'));
     const idUser = $('#id-user').val();
 
-    if (idUser == null) {
+    if (idUser != null) {
         const api = ApiUsuario();
         api.Consultar(idUser, function (response) {
             const user = response.data;
@@ -138,12 +139,12 @@ $('.btnSave').click(function () {
             senha: $('#senha').val(),
             admin: ($('#radio-admin').prop('checked')) ? true : false
         }
-        
+
         const api = ApiUsuario();
 
         if ($('#id-user').val() != '') {
-            user.id = $('#id-user');
-            api.Alterar(user, function(response){
+            user.id = $('#id-user').val();
+            api.Alterar(user, function (response) {
                 const toast = {
                     title: 'Sucesso',
                     message: 'Usuário alterado com êxito.',
@@ -151,12 +152,12 @@ $('.btnSave').click(function () {
                 }
                 NewToast(toast);
                 $('#user-modal').modal('hide');
-                listUsers();  
-            }, function(){
+                listUsers();
+            }, function () {
                 $('.btnSave').text('Carregando...');
-            }, function(){
+            }, function () {
                 $('.btnSave').text('Salvar');
-            }, function(error){
+            }, function (error) {
                 const toast = {
                     title: 'Erro ao alterar usuário',
                     message: 'Há um problema com a aplicação, entre em contato com o suporte.',
@@ -166,7 +167,7 @@ $('.btnSave').click(function () {
                 console.log(error);
             });
         } else {
-            api.Adicionar(user, function(response){
+            api.Adicionar(user, function (response) {
                 const toast = {
                     title: 'Sucesso',
                     message: 'Usuário adicionado com êxito.',
@@ -174,12 +175,12 @@ $('.btnSave').click(function () {
                 }
                 NewToast(toast);
                 $('#user-modal').modal('hide');
-                listUsers();  
-            }, function(){
+                listUsers();
+            }, function () {
                 $('.btnSave').text('Carregando...');
-            }, function(){
+            }, function () {
                 $('.btnSave').text('Salvar');
-            }, function(error){
+            }, function (error) {
                 const toast = {
                     title: 'Erro ao adicionar usuário',
                     message: 'Há um problema com a aplicação, entre em contato com o suporte.',
@@ -188,7 +189,7 @@ $('.btnSave').click(function () {
                 NewToast(toast);
                 console.log(error);
             })
-        }   
+        }
     }
 })
 
@@ -234,7 +235,7 @@ function validateModalFields() {
         erro = true;
     }
 
-    if (erro) 
+    if (erro)
         return false;
     else
         return true;

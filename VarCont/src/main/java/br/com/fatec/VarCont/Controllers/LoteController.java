@@ -27,7 +27,7 @@ public class LoteController {
 	private LoteService serviceLote;
 	
 	@GetMapping("estoque")
-	public ResponseEntity<Object> listaEstoques(HttpSession session) {
+	public ResponseEntity<Object> listaEstoques() {
 		try {
 				return ResponseEntity.ok(serviceLote.listarEstoques());
 		} catch (Exception e) {
@@ -36,7 +36,7 @@ public class LoteController {
 	}
 	
 	@GetMapping("lote")
-	public ResponseEntity<Object> buscarLote(HttpSession session){
+	public ResponseEntity<Object> buscarLote(){
 		try {
 				return ResponseEntity.ok(serviceLote.buscarLote());
 		} catch (Exception e) {
@@ -44,7 +44,7 @@ public class LoteController {
 		}	
 	}
 	@GetMapping("lote/{id}")
-	public ResponseEntity<Object> buscarLoteId(@PathVariable(name = "id", required = true) Long id, HttpSession session ) throws LoteNotFoundException{
+	public ResponseEntity<Object> buscarLoteId(@PathVariable(name = "id", required = true) Long id) throws LoteNotFoundException{
 			try {
 				return ResponseEntity.ok(serviceLote.buscarId(id));
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class LoteController {
 		}
 	}
 	@PostMapping("lote/criar")
-	public ResponseEntity<Object> criarLote(@Valid @RequestBody LoteResource loteResource, HttpSession session) {
+	public ResponseEntity<Object> criarLote(@Valid @RequestBody LoteResource loteResource) {
 		try {
 				serviceLote.cadastrarLote(loteResource);
 				return ResponseEntity.ok(null);
@@ -62,7 +62,7 @@ public class LoteController {
 	}
 	
 	@DeleteMapping("lote/{id}")
-	public ResponseEntity<Object> deletarLote(@PathVariable(name = "id", required = true) Long id, HttpSession session ) throws LoteNotFoundException{
+	public ResponseEntity<Object> deletarLote(@PathVariable(name = "id", required = true) Long id) throws LoteNotFoundException{
 		try {
 				serviceLote.deleteId(id);
 				return ResponseEntity.ok(null);
