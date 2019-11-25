@@ -165,5 +165,9 @@ function validateModalFields() {
 }
 
 function clearFields(){
-	$('#produto-select').val('');
+	$('#produto-select').val('default');
+	$('#produto-custo').val('');
+	$('#estoque-quantidade').val('');
+	$('.custom-range').val(0);
+	$('#total-value').val(0);
 }
