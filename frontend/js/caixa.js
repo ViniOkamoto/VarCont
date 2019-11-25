@@ -102,7 +102,7 @@ $("#venda-caixa").ready(function () {
 	}
 
 	const apiUsuario = ApiUsuario();
-	apiUsuario.listar(function(response){
+	apiUsuario.Listar(function(response){
 		let text = '<option>Selecionar usuário</option>';
 		const users = response.data;
 		users.forEach(user => {
@@ -112,7 +112,7 @@ $("#venda-caixa").ready(function () {
 		$("#usuario-select").html(text)
 	}, function(){}, function(){}, function(error){
 		const toast = {
-			title: 'Erro na listagem de produtos',
+			title: 'Erro na listagem de usuários',
 			message: 'Há um problema com a aplicação, entre em contato com o suporte.',
 			delay: 4000
 		}
