@@ -24,9 +24,8 @@
 
   <div class="container-fluid p-4">
     <div class="row mb-3">
-      <div class="col d-flex justify-content-between align-items-center px-4">
+      <div class="col d-flex justify-content-start align-items-center px-4">
         <h1 id="sectionTitle">Lotes</h1>
-        <div class="btnAdd" data-toggle="modal" data-target="#data-modal">+</div>
       </div>
     </div>
     <div class="row">
@@ -48,52 +47,8 @@
                 <div class="dataInfo mb-2"> lote.qtdTotal </div>
               </div>
               <div class="d-flex">
-                <button class="btnEdit d-flex align-items-center" data-id="  lote.id  " data-toggle="modal"
-                  data-target="#data-modal"><i class="material-icons">edit</i></button>
                 <button class="btnDel d-flex align-items-center ml-2" data-id="  lote.id  "><i
                     class="material-icons">delete</i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MODAL -->
-      <div class="modal fade" id="data-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal modal-dialog-centered" role="document">
-          <div class="modal-content" style="border-radius: 3px; border: 0;">
-            <div class="header-modal d-flex align-items-center justify-content-between">
-              <span></span>
-              <h1>Lote</h1>
-              <a data-dismiss="modal" style="cursor: pointer;" class="mr-2">X</a>
-            </div>
-            <div class="content-modal">
-              <div class="title d-flex align-items-center pb-2">
-                <i class="material-icons">
-                  account_circle
-                </i>
-                <div class="ml-2">Dados do Lote</div>
-              </div>
-              <div class="d-flex flex-column">
-                <input type="hidden" id="id-lote">
-
-                <div class="row d-flex justify-content-start align-items-center mt-3 mb-3">
-                  <div class="col">
-                    <label class="subtitle" for="produto-select">Produto</label>
-                    <div class="input-group">
-                      <select class="custom-select" id="produto-select">
-                      </select>
-
-                    </div>
-                  </div>
-                  <div class="col">
-                    <label class="subtitle " for="lote-quantidade">Quantidade Adquirida</label>
-                    <input id="lote-quantidade" placeholder="Digite a quantidade">
-                  </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <button class="btnSave mt-2">Salvar</button>
-                </div>
               </div>
             </div>
           </div>
@@ -107,7 +62,7 @@
     <script type="text/javascript" src="js/axios.js"></script>
     <script type="text/javascript" src="js/toast.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
-    <script type="text/javascript" src="js/lotes.js"></script>
+    <script type="text/javascript" src="js/venda.js"></script>
 </body>
 
 </html>

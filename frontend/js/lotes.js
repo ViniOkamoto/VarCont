@@ -21,25 +21,54 @@ function expandCardEvent() {
   })
 }
 
+$('#data-modal').ready(function () {
+  const apiProduto = ApiProduto();
+  carregarSelect("Produtos")
+  function carregarSelect(id) {
+    apiProduto.Listar(function (response) {
+      let text = '<option> Selecionar ' + id + '</option>'
+      const produto = response.data
+      produto.forEach(prod => {
+        let html = '<option value= ' + prod.id + ' >' + prod.nomeProd + '</option>'
+        text += html
+      })
+      $("#produto-select").html(text)
+    }, function () { }, function () { }, function (error) {
+      const toast = {
+        title: 'Erro na listagem de produtos',
+        message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+      }
+      NewToast(toast);
+      console.log(error);
+    })
+  }
+});
+
 function listModal() {
-  api = ApiProduto();
+  api = ApiLote();
   api.Listar(function (response) {
     let text = "";
-    response.data.forEach(prod => {
-      let html = '<div class="card-item p-3 mb-3"> ' +
+    response.data.forEach(lote => {
+      let html = '<div class="card-item p-3 mb-3">' +
         '<div class="header-card cursor-pointer d-flex justify-content-between align-items-center">' +
-        '<h2>' + prod.nomeProd + '</h2>' +
-        '<i class="material-icons expand">expand_more</i>' +
+        '<h2>Lote de ' + lote.produto.nomeProd + '</h2>' +
+        '<i class="material-icons expand"> expand_more</i>' +
         '</div>' +
         '<div class="body-card d-none">' +
         '<div class="d-flex justify-content-between align-items-end">' +
         '<div class="d-flex flex-column mt-3">' +
-        '<h3>Custo Entrada:</h3>' +
-        '<div class="dataInfo mb-2">' + prod.valorCompra + '</div>' +
-        '<h3> Custo Saída: </h3>' +
-        '<div class="dataInfo mb-2">' + prod.valorVenda + '</div>' +
+        '<h3> Data de criação:</h3>' +
+        '<div class="dataInfo mb-2">' + lote.data + '</div>' +
+        '<h3>Quantidade Adquirida:</h3>' +
+        '<div class="dataInfo mb-2">' + lote.qtdCompra + '</div>' +
+        '<h3> Quantidade do lote: </h3>' +
+        '<div class="dataInfo mb-2">' + lote.qtdTotal + '</div>' +
         '</div>' +
-        '<button class="btnEdit" data-id="' + prod.idProduto + '" data-toggle="modal" data-target="#data-modal">Editar</button>' +
+        '<div class="d-flex">' +
+        '<button class="btnEdit d-flex align-items-center" data-id="' + lote.id + '" data-toggle="modal"' +
+        'data-target="#data-modal"><i class="material-icons">edit</i></button>' +
+        '<button class="btnDel d-flex align-items-center ml-2" data-id="' + lote.id + '"><i class="material-icons">delete</i></button>' +
+        '</div>' +
         '</div>' +
         '</div>' +
         '</div>';
@@ -48,33 +77,32 @@ function listModal() {
     })
     $('.list-data').html(text);
     expandCardEvent();
+    deleteClickEvent();
   }, function () { }, function () { }, function (error) {
     const toast = {
-      title: 'Erro na listagem de produtos',
+      title: 'Erro na listagem de lotes',
       message: 'Há um problema com a aplicação, entre em contato com o suporte.'
     }
     NewToast(toast);
     console.log(error);
   })
 }
-
 $('#data-modal').on('show.bs.modal', function (e) {
   const button = $(e.relatedTarget);
   const modal = $(this);
-  $('#id-produto').val(button.data('id'));
-  const idProduto = $('#id-produto').val();
+  $('#id-lote').val(button.data('id'));
+  const idLote = $('#id-lote').val();
 
-  if (idProduto != null) {
-    const api = ApiProduto();
-    api.Consultar(idProduto, function (response) {
-      const produto = response.data;
-      modal.find('#produto-nome').val(produto.nomeProd);
-      modal.find('#produto-entrada').val(produto.valorCompra);
-      modal.find('#produto-saida').val(produto.valorVenda);
+  if (idLote != "") {
+    const api = ApiLote();
+    api.Consultar(idLote, function (response) {
+      const lote = response.data;
+      modal.find('#produto-select').val(lote.produto.id);
+      modal.find('#lote-quantidade').val(lote.valorCompra);
 
     }, function () { }, function () { }, function (error) {
       const toast = {
-        title: 'Erro na consulta do produto',
+        title: 'Erro na consulta do lote',
         message: 'Há um problema com a aplicação, entre em contato com o suporte.'
       }
       NewToast(toast);
@@ -84,28 +112,26 @@ $('#data-modal').on('show.bs.modal', function (e) {
 })
 
 $('#data-modal').on('hidden.bs.modal', function (e) {
-  $('#id-produto').val('');
-  $('#produto-nome').val('');
-  $('#produto-entrada').val('');
-  $('#produto-saida').val('');
+  $('#id-lote').val('');
+  $('#produto-select').val('');
+  $('#lote-quantidade').val('');
 })
 
 $('.btnSave').click(function () {
   if (validateModalFields()) {
-    const produto = {
-      nomeProd: $('#produto-nome').val(),
-      valorCompra: $('#produto-entrada').val(),
-      valorVenda: $('#produto-saida').val(),
+    const lote = {
+      idProduto: $('#produto-select').val(),
+      qtdCompra: $('#lote-quantidade').val(),
     }
 
-    const api = ApiProduto();
+    const api = ApiLote();
 
-    if ($('#id-produto').val() != '') {
-      produto.id = $('#id-produto').val();
-      api.Alterar(produto, function (response) {
+    if ($('#id-lote').val() != '') {
+      lote.id = $('#id-lote').val();
+      api.Alterar(lote, function (response) {
         const toast = {
           title: 'Sucesso',
-          message: 'produto alterado com êxito.',
+          message: 'lote alterado com êxito.',
           delay: 4000
         }
         NewToast(toast);
@@ -117,7 +143,7 @@ $('.btnSave').click(function () {
         $('.btnSave').text('Salvar');
       }, function (error) {
         const toast = {
-          title: 'Erro ao alterar produto',
+          title: 'Erro ao alterar lote',
           message: 'Há um problema com a aplicação, entre em contato com o suporte.',
           delay: 4000
         }
@@ -125,10 +151,10 @@ $('.btnSave').click(function () {
         console.log(error);
       });
     } else {
-      api.Adicionar(produto, function (response) {
+      api.Adicionar(lote, function (response) {
         const toast = {
           title: 'Sucesso',
-          message: 'Produto adicionado com êxito.',
+          message: 'lote adicionado com êxito.',
           delay: 4000
         }
         NewToast(toast);
@@ -140,7 +166,7 @@ $('.btnSave').click(function () {
         $('.btnSave').text('Salvar');
       }, function (error) {
         const toast = {
-          title: 'Erro ao adicionar produto',
+          title: 'Erro ao adicionar lote',
           message: 'Há um problema com a aplicação, entre em contato com o suporte.',
           delay: 4000
         }
@@ -150,33 +176,45 @@ $('.btnSave').click(function () {
     }
   }
 })
+function deleteClickEvent() {
+  $('.btnDel').click(function () {
+    const id = $(this).data('id');
+    const api = ApiLote();
+    api.Excluir(id, function (response) {
+      const toast = {
+        title: 'Sucesso',
+        message: 'Lote excluído com êxito.',
+        delay: 4000
+      }
+      NewToast(toast);
+      listModal();
+    }, function () { }, function () { }, function (error) {
+      const toast = {
+        title: 'Erro ao excluir lote',
+        message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+      }
+      NewToast(toast);
+      console.log(error);
+    })
+  })
+}
 
 function validateModalFields() {
   let erro = false;
-  if ($('#produto-nome').val() == '') {
+  if ($('#produto-select').val() == '') {
     const toast = {
-      title: 'Campos vazios',
-      message: 'O nome é obrigatório.',
+      title: 'Campo vazios',
+      message: 'O produto é obrigatório.',
       delay: 4000
     }
     NewToast(toast)
     erro = true;
   }
 
-  if ($('#produto-entrada').val() == '') {
+  if ($('#lote-quantidade').val() == '') {
     const toast = {
       title: 'Campos vazios',
-      message: 'O preço é obrigatório.',
-      delay: 4000
-    }
-    NewToast(toast)
-    erro = true;
-  }
-
-  if ($('#produto-saida').val() == '') {
-    const toast = {
-      title: 'Campos vazios',
-      message: 'O preço é obrigatório.',
+      message: 'A quantidade é obrigatório.',
       delay: 4000
     }
     NewToast(toast)

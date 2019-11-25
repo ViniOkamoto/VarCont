@@ -20,6 +20,10 @@ input:focus, select:focus, textarea:focus, button:focus {
     outline: none;
 }
 
+.form-control {
+    border-color: #ea6900 !important;
+}
+
 h1, h2, h3, h4, h5 {
     margin: 0;
 }

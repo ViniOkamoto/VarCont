@@ -39,7 +39,11 @@ function listModal() {
         '<h3> Custo Saída: </h3>' +
         '<div class="dataInfo mb-2">' + prod.valorVenda + '</div>' +
         '</div>' +
-        '<button class="btnEdit" data-id="' + prod.idProduto + '" data-toggle="modal" data-target="#data-modal">Editar</button>' +
+        '<div class="d-flex">' +
+        '<button class="btnEdit d-flex align-items-center" data-id="' + prod.id + '" data-toggle="modal"' +
+        'data-target="#data-modal"><i class="material-icons">edit</i></button>' +
+        '<button class="btnDel d-flex align-items-center ml-2" data-id="' + prod.id + '"><i class="material-icons">delete</i></button>' +
+        '</div>' +
         '</div>' +
         '</div>' +
         '</div>';
@@ -48,6 +52,7 @@ function listModal() {
     })
     $('.list-data').html(text);
     expandCardEvent();
+    deleteClickEvent();
   }, function () { }, function () { }, function (error) {
     const toast = {
       title: 'Erro na listagem de produtos',
@@ -89,6 +94,7 @@ $('#data-modal').on('hidden.bs.modal', function (e) {
   $('#produto-entrada').val('');
   $('#produto-saida').val('');
 })
+
 
 $('.btnSave').click(function () {
   if (validateModalFields()) {
@@ -150,6 +156,29 @@ $('.btnSave').click(function () {
     }
   }
 })
+
+function deleteClickEvent() {
+  $('.btnDel').click(function () {
+    const id = $(this).data('id');
+    const api = ApiProduto();
+    api.Excluir(id, function (response) {
+      const toast = {
+        title: 'Sucesso',
+        message: 'Produto excluído com êxito.',
+        delay: 4000
+      }
+      NewToast(toast);
+      listModal();
+    }, function () { }, function () { }, function (error) {
+      const toast = {
+        title: 'Erro ao excluir produto',
+        message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+      }
+      NewToast(toast);
+      console.log(error);
+    })
+  })
+}
 
 function validateModalFields() {
   let erro = false;
