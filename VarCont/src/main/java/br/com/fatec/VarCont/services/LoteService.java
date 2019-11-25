@@ -21,7 +21,7 @@ public class LoteService {
 
 	@Autowired
 	private LoteConversor serviceConversor;
-
+	
 	private Optional<Lote> getOptional(Long id) {
 		Optional<Lote> optionalLote = loteRepository.findById(id);
 		return optionalLote;
@@ -45,6 +45,11 @@ public class LoteService {
 		List<Lote> listaLotes = loteRepository.findAll();
 		return listaLotes;
 	}
+	
+	public void alteraLote(LoteResource loteResource,Long id) throws Exception {
+		LOG.info("Serviço para alterar os lotes, sendo executado");
+		serviceConversor.conversorAltera(loteResource, id);
+	}
 
 	public Lote buscarId(Long id) throws LoteNotFoundException {
 		Optional<Lote> optionalLote = getOptional(id);
@@ -54,7 +59,7 @@ public class LoteService {
 		} else {
 			lote = optionalLote.get();
 		}
-		LOG.info("Serviço para buscar por id sendo executado");
+		LOG.info("Serviço para buscar lote por id sendo executado");
 		return lote;
 	}
 

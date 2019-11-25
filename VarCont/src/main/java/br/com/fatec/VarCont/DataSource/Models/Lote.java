@@ -25,7 +25,7 @@ public class Lote implements Serializable {
 	private long id;
 
 	@Column(name = "lote_data")
-	private Date data = new Date();
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn(name = "prod_id", referencedColumnName = "prod_id")

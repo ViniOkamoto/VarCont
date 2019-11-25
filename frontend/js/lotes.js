@@ -98,7 +98,7 @@ $('#data-modal').on('show.bs.modal', function (e) {
     api.Consultar(idLote, function (response) {
       const lote = response.data;
       modal.find('#produto-select').val(lote.produto.id);
-      modal.find('#lote-quantidade').val(lote.valorCompra);
+      modal.find('#lote-quantidade').val(lote.qtdCompra);
 
     }, function () { }, function () { }, function (error) {
       const toast = {
@@ -131,7 +131,7 @@ $('.btnSave').click(function () {
       api.Alterar(lote, function (response) {
         const toast = {
           title: 'Sucesso',
-          message: 'lote alterado com êxito.',
+          message: 'Lote alterado com êxito.',
           delay: 4000
         }
         NewToast(toast);
@@ -154,7 +154,7 @@ $('.btnSave').click(function () {
       api.Adicionar(lote, function (response) {
         const toast = {
           title: 'Sucesso',
-          message: 'lote adicionado com êxito.',
+          message: 'Lote adicionado com êxito.',
           delay: 4000
         }
         NewToast(toast);
@@ -176,6 +176,7 @@ $('.btnSave').click(function () {
     }
   }
 })
+
 function deleteClickEvent() {
   $('.btnDel').click(function () {
     const id = $(this).data('id');

@@ -5,7 +5,6 @@ $("#produto-select").on("change", function () {
   var value = $(this).val();
   $('.close').trigger('click');
   const apiProduto = ApiProduto();
-  console.log(value)
   apiProduto.Consultar(value, function (response) {
     const produto = response.data
     $('#produto-custo').attr({ placeholder: produto.valorVenda })
