@@ -39,7 +39,7 @@ public class VendaController {
 		}
 	}
 
-	@PostMapping("venda")
+	@PostMapping("venda/criar")
 	public ResponseEntity<Object> cadastrarVenda(@Valid @RequestBody VendaResource vendaResource) {
 		try {
 				serviceVenda.criarVenda(vendaResource);
