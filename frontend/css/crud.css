@@ -107,3 +107,12 @@ header i {
     border: none;
     background-color: transparent;
 }
+
+#btnSale {
+    background-color: #ea6900;
+    color: white;
+    font-family: filsonlight;
+    border-radius: 40px;
+    padding: 8px 15px;
+    border: 0;
+}
