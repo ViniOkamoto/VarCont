@@ -88,6 +88,29 @@ function listModal() {
 	})
 }
 $('#data-modal').on('show.bs.modal', function (e) {
+<<<<<<< HEAD
+  const button = $(e.relatedTarget);
+  const modal = $(this);
+  $('#id-lote').val(button.data('id'));
+  const idLote = $('#id-lote').val();
+
+  if (idLote != "") {
+    const api = ApiLote();
+    api.Consultar(idLote, function (response) {
+      const lote = response.data;
+      modal.find('#produto-select').val(lote.produto.id);
+      modal.find('#lote-quantidade').val(lote.qtdCompra);
+
+    }, function () { }, function () { }, function (error) {
+      const toast = {
+        title: 'Erro na consulta do lote',
+        message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+      }
+      NewToast(toast);
+      console.log(error);
+    })
+  }
+=======
 	const button = $(e.relatedTarget);
 	const modal = $(this);
 	$('#id-lote').val(button.data('id'));
@@ -109,6 +132,7 @@ $('#data-modal').on('show.bs.modal', function (e) {
 			console.log(error);
 		})
 	}
+>>>>>>> d2e5e5c0c17e96d27ee482861736b38e1c9613df
 })
 
 $('#data-modal').on('hidden.bs.modal', function (e) {
@@ -118,6 +142,65 @@ $('#data-modal').on('hidden.bs.modal', function (e) {
 })
 
 $('.btnSave').click(function () {
+<<<<<<< HEAD
+  if (validateModalFields()) {
+    const lote = {
+      idProduto: $('#produto-select').val(),
+      qtdCompra: $('#lote-quantidade').val(),
+    }
+
+    const api = ApiLote();
+
+    if ($('#id-lote').val() != '') {
+      lote.id = $('#id-lote').val();
+      api.Alterar(lote, function (response) {
+        const toast = {
+          title: 'Sucesso',
+          message: 'Lote alterado com êxito.',
+          delay: 4000
+        }
+        NewToast(toast);
+        $('#data-modal').modal('hide');
+        listModal();
+      }, function () {
+        $('.btnSave').text('Carregando...');
+      }, function () {
+        $('.btnSave').text('Salvar');
+      }, function (error) {
+        const toast = {
+          title: 'Erro ao alterar lote',
+          message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+          delay: 4000
+        }
+        NewToast(toast);
+        console.log(error);
+      });
+    } else {
+      api.Adicionar(lote, function (response) {
+        const toast = {
+          title: 'Sucesso',
+          message: 'Lote adicionado com êxito.',
+          delay: 4000
+        }
+        NewToast(toast);
+        $('#data-modal').modal('hide');
+        listModal();
+      }, function () {
+        $('.btnSave').text('Carregando...');
+      }, function () {
+        $('.btnSave').text('Salvar');
+      }, function (error) {
+        const toast = {
+          title: 'Erro ao adicionar lote',
+          message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+          delay: 4000
+        }
+        NewToast(toast);
+        console.log(error);
+      })
+    }
+  }
+=======
 	if (validateModalFields()) {
 		const lote = {
 			idProduto: $('#produto-select').val(),
@@ -175,7 +258,9 @@ $('.btnSave').click(function () {
 			})
 		}
 	}
+>>>>>>> d2e5e5c0c17e96d27ee482861736b38e1c9613df
 })
+
 function deleteClickEvent() {
 	$('.btnDel').click(function () {
 		const id = $(this).data('id');

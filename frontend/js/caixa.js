@@ -1,5 +1,39 @@
 
 $("#produto-select").on("change", function () {
+<<<<<<< HEAD
+  var value = $(this).val();
+  $('.close').trigger('click');
+  const apiProduto = ApiProduto();
+  apiProduto.Consultar(value, function (response) {
+    const produto = response.data
+    $('#produto-custo').attr({ placeholder: produto.valorVenda })
+  }, function () { }, function () { }, function (error) {
+    const toast = {
+      title: 'Erro na consulta do produto',
+      message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+    }
+    NewToast(toast);
+    console.log(error);
+  })
+  const apiLote = ApiLote();
+  apiLote.Estoque(function (response) {
+    const estoques = response.data
+    estoques.forEach(estoque => {
+      var id = estoque[0];
+      var quantidade = estoque[2];
+      if (id == value) {
+        $('#estoque-quantidade').attr({ placeholder: quantidade })
+      }
+    })
+  }, function () { }, function () { }, function (error) {
+    const toast = {
+      title: 'Erro na consulta do estoque',
+      message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+    }
+    NewToast(toast);
+    console.log(error);
+  })
+=======
 	var value = $(this).val();
 	$('.close').trigger('click');
 	const apiProduto = ApiProduto();
@@ -39,6 +73,7 @@ $("#produto-select").on("change", function () {
 
 $('.custom-range').change(function () {
 	fillDinamicFields();
+>>>>>>> d2e5e5c0c17e96d27ee482861736b38e1c9613df
 })
 
 function fillDinamicFields() {
