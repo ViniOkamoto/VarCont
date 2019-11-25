@@ -2,86 +2,93 @@
 <html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="css/bootstrap.css" />
-  <link rel="stylesheet" href="css/crud.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/crud.css" />
 
-  <link rel="icon" type="imagem/png" href="assets/icon.png" />
-  <title>VarCont | Caixa</title>
+	<link rel="icon" type="imagem/png" href="assets/icon.png" />
+	<title>VarCont | Caixa</title>
 </head>
 
 <body>
-  <header>
-    <div class="d-flex align-items-center">
-      <i class="material-icons">menu</i>
-      <img src="assets/logo-branca.png" id="logo" alt="Logo" />
-    </div>
-    <i class="material-icons">more_vert</i>
-  </header>
-  <div class="container-fluid p-4">
-    <div class="row mb-3">
-      <div class="col d-flex justify-content-between align-items-center px-4">
-        <h1 id="sectionTitle">Caixa</h1>
-      </div>
-    </div>
-    <div class="col d-flex">
-      <div class="col-5 align-items-center">
-        <div class="card-item p-3">
-          <h3>Estoques disponíveis</h3>
-          <div class=" row d-flex justify-content-center mb-3 list-estoque">
-          </div>
-        </div>
-      </div>
-      <!-- Caixa -->
-      <div class="col-7" id="venda-caixa">
-        <div class="card-item p-3">
-          <h3>Venda</h3>
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Produtos</label>
-              <select class="form-control" id="produto-select">
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="col">
-                <label for="produto-custo" class="col-form-label">Custo Unitario</label>
-                <input id="produto-custo" class="form-control" type="text" placeholder="4.50" readonly>
-              </div>
-              <div>
-                <label for="estoque-quantidade" class="col-form-label">Quantidade no Estoque</label>
-                <input id="estoque-quantidade" class="form-control" type="text" placeholder="400" readonly>
-              </div>
-            </div>
-            <form class="form-row">
-              <div class="col">
-                <label for="venda-quantidade" class="col-form-label">Quantidade desejada</label>
-                <input type="range" class="custom-range" min="0" max="5" id="venda-quantidade">
-              </div>
-              <div>
-                <label for="staticEmail" class="col-form-label">Total(R$)</label>
-                <input class="form-control" type="text" placeholder="100.00" readonly>
-              </div>
-              <div class="d-flex justify-content-flex-end">
-                <button class="btn btn-primary" type="submit">Submit form</button>
-              </div>
-            </form>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+	<header>
+		<div class="d-flex align-items-center">
+			<i class="material-icons">menu</i>
+			<img src="assets/logo-branca.png" id="logo" alt="Logo" />
+		</div>
+		<i class="material-icons">more_vert</i>
+	</header>
+	<div class="container-fluid p-4">
+		<div class="row mb-3">
+			<div class="col d-flex justify-content-between align-items-center px-4">
+				<h1 id="sectionTitle">Caixa</h1>
+			</div>
+		</div>
+		<div class="row d-flex">
+			<div class="col-5 align-items-center">
+				<div class="card-item p-3">
+					<h2>Estoques disponíveis</h2>
+					<div class=" row d-flex justify-content-center mb-3 list-estoque">
+					</div>
+				</div>
+			</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/popper.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/axios.js"></script>
-  <script type="text/javascript" src="js/toast.js"></script>
-  <script type="text/javascript" src="js/api.js"></script>
-  <script type="text/javascript" src="js/caixa.js"></script>
+			<!-- Caixa -->
+			<div class="col-7" id="venda-caixa">
+				<div class="card-item p-3">
+					<h2>Venda</h2>
+					<form>
+						<div>
+							<label for="usuario-select">Usuarios</label>
+							<select class="form-control" id="usuario-select">
+							</select>
+						</div>
+						<div>
+							<label for="produto-select">Produtos</label>
+							<select class="form-control" id="produto-select">
+							</select>
+						</div>
+						<div class="form-row">
+							<div class="col">
+								<label for="produto-custo" class="col-form-label">Custo unitário</label>
+								<input id="produto-custo" class="form-control" type="text" placeholder="" readonly>
+							</div>
+							<div class="col">
+								<label for="estoque-quantidade" class="col-form-label">Quantidade no Estoque</label>
+								<input id="estoque-quantidade" class="form-control" type="text" readonly>
+							</div>
+						</div>
+						<form>
+							<div class="form-row d-flex align-items-center">
+								<label for="venda-quantidade" class="col-form-label">Quantidade desejada</label>
+								<input type="range" class="custom-range px-3 col-11" step="1" min="0" id="venda-quantidade" readonly>
+								<input class="form-control col-1" id="range-value" type="text" readonly>
+							</div>
+							<div>
+								<label for="total-value" class="col-form-label">Total (R$)</label>
+								<input class="form-control" id="total-value" type="text" readonly>
+							</div>
+							<div class="d-flex justify-content-end mt-3">
+								<button id="btnSale" class="btn btn-primary" type="submit">Realizar venda</button>
+							</div>
+						</form>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/popper.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/toast.js"></script>
+	<script type="text/javascript" src="js/axios.js"></script>
+	<script type="text/javascript" src="js/api.js"></script>
+	<script type="text/javascript" src="js/caixa.js"></script>
 </body>
 
 </html>
