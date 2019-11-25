@@ -1,40 +1,44 @@
 
-$("#produto-select").on("change", function () {
-	var value = $(this).val();
-	$('.close').trigger('click');
-	const apiProduto = ApiProduto();
-	apiProduto.Consultar(value, function (response) {
-		const produto = response.data;
-		$('#produto-custo').val(produto.valorVenda);
-	}, function () { }, function () { }, function (error) {
-		const toast = {
-			title: 'Erro na consulta do produto',
-			message: 'Há um problema com a aplicação, entre em contato com o suporte.'
-		}
-		NewToast(toast);
-		console.log(error);
-	})
-	const apiLote = ApiLote();
-	apiLote.Estoque(function (response) {
-		const estoques = response.data
-		estoques.forEach(estoque => {
-			var id = estoque[0];
-			var quantidade = estoque[2];
-			if (id == value) {
-				$('#estoque-quantidade').val(quantidade);
-				$('.custom-range').attr('max', quantidade);
-				$('.custom-range').val(0);
-				fillDinamicFields();
+$("#produto-select").change(function () {
+	if ($(this).val() != 'default') {
+		var value = $(this).val();
+		$('.close').trigger('click');
+		const apiProduto = ApiProduto();
+		apiProduto.Consultar(value, function (response) {
+			const produto = response.data;
+			$('#produto-custo').val(produto.valorVenda);
+		}, function () { }, function () { }, function (error) {
+			const toast = {
+				title: 'Erro na consulta do produto',
+				message: 'Há um problema com a aplicação, entre em contato com o suporte.'
 			}
+			NewToast(toast);
+			console.log(error);
 		})
-	}, function () { }, function () { }, function (error) {
-		const toast = {
-			title: 'Erro na consulta do estoque',
-			message: 'Há um problema com a aplicação, entre em contato com o suporte.'
-		}
-		NewToast(toast);
-		console.log(error);
-	})
+		const apiLote = ApiLote();
+		apiLote.Estoque(function (response) {
+			const estoques = response.data
+			estoques.forEach(estoque => {
+				var id = estoque[0];
+				var quantidade = estoque[2];
+				if (id == value) {
+					$('#estoque-quantidade').val(quantidade);
+					$('.custom-range').attr('max', quantidade);
+					$('.custom-range').val(0);
+					fillDinamicFields();
+				}
+			})
+		}, function () { }, function () { }, function (error) {
+			const toast = {
+				title: 'Erro na consulta do estoque',
+				message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+			}
+			NewToast(toast);
+			console.log(error);
+		})
+	} else {
+		clearFields();
+	}
 })
 
 $('.custom-range').change(function () {
@@ -62,6 +66,7 @@ $('#btnSale').click(function(e){
 				delay: 4000
 			}
 			NewToast(toast);
+			clearFields();
 		}, function () {
 			$('#btnSale').text('Carregando...');
 		}, function () {
@@ -143,7 +148,7 @@ function validateModalFields() {
 		erro = true;
 	}
 
-	if ($('#range-value').val() == '') {
+	if ($('#range-value').val() == '' || $('#range-value').val() == '0') {
 		const toast = {
 			title: 'Campos vazios',
 			message: 'A quantidade é obrigatória.',
@@ -157,4 +162,8 @@ function validateModalFields() {
 		return false;
 	else
 		return true;
+}
+
+function clearFields(){
+	$('#produto-select').val('');
 }
