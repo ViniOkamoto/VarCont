@@ -83,7 +83,7 @@ $("#venda-caixa").ready(function () {
 	carregarSelect("produto");	
 	function carregarSelect(id) {
 		apiProduto.Listar(function (response) {
-			let text = '<option>Selecionar ' + id + '</option>'
+			let text = '<option value="default">Selecionar ' + id + '</option>'
 			const produto = response.data
 			produto.forEach(prod => {
 				let html = '<option value= ' + prod.id + ' >' + prod.nomeProd + '</option>'
@@ -103,7 +103,7 @@ $("#venda-caixa").ready(function () {
 
 	const apiUsuario = ApiUsuario();
 	apiUsuario.Listar(function(response){
-		let text = '<option>Selecionar usuário</option>';
+		let text = '<option value="default">Selecionar usuário</option>';
 		const users = response.data;
 		users.forEach(user => {
 			let html = '<option value= ' + user.id + ' >' + user.nome + '</option>';
@@ -123,7 +123,7 @@ $("#venda-caixa").ready(function () {
 
 function validateModalFields() {
 	let erro = false;
-	if ($('#usuario-select').val() == '') {
+	if ($('#usuario-select').val() == 'default') {
 		const toast = {
 			title: 'Campos vazios',
 			message: 'O usuário é obrigatório.',
@@ -133,7 +133,7 @@ function validateModalFields() {
 		erro = true;
 	}
 
-	if ($('#produto-select').val() == '') {
+	if ($('#produto-select').val() == 'default') {
 		const toast = {
 			title: 'Campos vazios',
 			message: 'O produto é obrigatório.',
