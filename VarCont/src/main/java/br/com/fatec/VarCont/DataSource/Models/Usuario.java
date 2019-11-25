@@ -1,8 +1,6 @@
 package br.com.fatec.VarCont.DataSource.Models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -43,8 +41,6 @@ String senha;
 @NotNull(message= "Tipo de usuário não ser vazio")
 boolean admin;
 
-@OneToMany(mappedBy="idUsuario",cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
-private List<Venda> listaVenda = new ArrayList<>();
    
     public long getId() {
         return id;

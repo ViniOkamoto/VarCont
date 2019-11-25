@@ -29,7 +29,7 @@ public class Lote implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "prod_id", referencedColumnName = "prod_id")
-	private Produto idProduto;
+	private Produto produto;
 
 	@Column(name = "lote_qtdCompra")
 	private int qtdCompra;
@@ -53,12 +53,12 @@ public class Lote implements Serializable {
 		this.data = data;
 	}
 
-	public Produto getIdProduto() {
-		return idProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(Produto idProduto) {
+		this.produto = idProduto;
 	}
 
 	public int getQtdCompra() {

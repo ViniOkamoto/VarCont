@@ -67,8 +67,8 @@ public class VendaConversor {
 				antigoTotal -= qtdConta;
 				loteRepository.updateQtdTotal(antigoTotal, loteId);
 			}
-			venda.setIdProduto(produto);
-			venda.setIdUsuario(usuario);
+			venda.setProduto(produto);
+			venda.setUsuario(usuario);
 			venda.setQtdVenda(qtd);
 			return venda;
 		} catch (Exception e) {

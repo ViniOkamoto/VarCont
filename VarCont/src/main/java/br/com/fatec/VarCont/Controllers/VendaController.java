@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatec.VarCont.Resource.Models.VendaResource;
+import br.com.fatec.VarCont.exceptions.VendaNotFoundException;
 import br.com.fatec.VarCont.services.VendaService;
 
 @RestController
@@ -22,6 +23,15 @@ public class VendaController {
 
 	@GetMapping("venda")
 	public ResponseEntity<Object> listarVendas(){
+		try {
+				return ResponseEntity.ok(serviceVenda.buscarVendas());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar as vendas");
+		}
+	}
+	
+	@GetMapping("venda/{id}")
+	public ResponseEntity<Object> vendaBuscaId(@PathVariable(name = "id", required = true) Long id) throws VendaNotFoundException{
 		try {
 				return ResponseEntity.ok(serviceVenda.buscarVendas());
 		} catch (Exception e) {

@@ -35,12 +35,8 @@ public class LoteController {
 	}
 	
 	@GetMapping("lote")
-	public ResponseEntity<Object> buscarLote(){
-		try {
+	public ResponseEntity<Object> listaLote(){
 				return ResponseEntity.ok(serviceLote.buscarLote());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar os lotes");
-		}	
 	}
 	@GetMapping("lote/{id}")
 	public ResponseEntity<Object> buscarLoteId(@PathVariable(name = "id", required = true) Long id) throws LoteNotFoundException{

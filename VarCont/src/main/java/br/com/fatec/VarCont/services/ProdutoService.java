@@ -1,6 +1,8 @@
 package br.com.fatec.VarCont.services;
 
+import br.com.fatec.VarCont.DataSource.Models.Lote;
 import br.com.fatec.VarCont.DataSource.Models.Produto;
+import br.com.fatec.VarCont.Repository.LoteRepository;
 import br.com.fatec.VarCont.Repository.ProdutoRepository;
 import br.com.fatec.VarCont.Resource.Models.ProdutoResource;
 import br.com.fatec.VarCont.exceptions.ProdutoNotFoundException;
@@ -25,6 +27,8 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
     
+    @Autowired
+    private LoteRepository loteRepository;
     
     private Optional<Produto> getOptional(Long id) {
     	Optional<Produto> optionalProduto = produtoRepository.findById(id);
@@ -70,19 +74,22 @@ public class ProdutoService {
     	if(!produtoOptional.isPresent()) {
     		throw new ProdutoNotFoundException("O produto não existe");
     	}else {
-    		produto.setIdProduto(id);
+    		produto.setId(id);
     		produtoRepository.saveAndFlush(produto);    		
     	} 	   
     }
     
     
-    public void deleteId(Long id) throws ProdutoNotFoundException {
+    public void deleteId(Long id) throws Exception {
     	Optional<Produto> optionalProduto = getOptional(id);
     	if (!optionalProduto.isPresent()) {
     		throw new ProdutoNotFoundException(" Produto não encontrado através do ID: " + id);
-    	} else {
-    		LOG.info("Serviço para buscar caixa, sendo executado");
-    		produtoRepository.delete(optionalProduto.get());
     	}
+    	Optional<Lote> optionalLote = loteRepository.findProdutoLote(id);
+    	if(optionalLote.isPresent()) {
+    		throw new Exception("Não é possível deletar o produto, pois existe um lote deste produto");
+    	}
+    	LOG.info("Serviço para buscar caixa, sendo executado");
+    	produtoRepository.delete(optionalProduto.get());
     }
 }

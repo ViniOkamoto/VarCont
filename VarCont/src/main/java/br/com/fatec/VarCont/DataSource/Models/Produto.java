@@ -25,7 +25,7 @@ public class Produto implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "prod_id")
-    private long idProduto;
+    private long id;
     
     @Column(name = "prod_nome")
     @NotEmpty(message = "O nome do produto não pode ser vazio")
@@ -40,12 +40,12 @@ public class Produto implements Serializable {
     private double valorVenda;
     
 
-	public long getIdProduto() {
-		return idProduto;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdProduto(long idProduto) {
-		this.idProduto = idProduto;
+	public void setId(long idProduto) {
+		this.id = idProduto;
 	}
 
 	public String getNomeProd() {

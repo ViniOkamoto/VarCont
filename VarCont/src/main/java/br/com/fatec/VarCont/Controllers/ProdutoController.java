@@ -29,7 +29,7 @@ public class ProdutoController {
     
     
     @GetMapping ("produto")
-    public ResponseEntity<Object> buscarProduto(HttpSession session){		
+    public ResponseEntity<Object> listaProduto(HttpSession session){		
 				return ResponseEntity.ok(serviceProduto.buscarProduto());
 	}
 	

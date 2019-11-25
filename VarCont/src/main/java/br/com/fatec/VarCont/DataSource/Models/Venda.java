@@ -19,11 +19,11 @@ public class Venda implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
-    private Usuario idUsuario;
+    private Usuario usuario;
     
     @ManyToOne
     @JoinColumn (name = "prod_id", referencedColumnName = "prod_id")
-    private Produto idProduto;
+    private Produto produto;
     
     @Column (name = "ven_qtd")
     private int qtdVenda;
@@ -44,20 +44,20 @@ public class Venda implements Serializable {
 		this.data = data;
 	}
 
-	public Usuario getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Usuario idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario idUsuario) {
+		this.usuario = idUsuario;
 	}
 
-	public Produto getIdProduto() {
-		return idProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(Produto idProduto) {
+		this.produto = idProduto;
 	}
 
 	public int getQtdVenda() {

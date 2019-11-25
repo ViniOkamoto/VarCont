@@ -39,6 +39,13 @@ public class VendaService {
 	}
 		
 	
+	public List<Venda> buscarVendaId(){
+		LOG.info("Serviço de listagem de vendas, sendo realizado");
+		List<Venda> listaVenda = vendaRepository.findAll();
+		return listaVenda;
+	}
+		
+	
 	public void criarVenda(VendaResource vendaResource) {
 		try {
 			LOG.info("Serviço de criação de venda, sendo executado");
@@ -56,15 +63,15 @@ public class VendaService {
 				throw new VendaNotFoundException("A venda cujo o id é :" + id + " não foi encontrada");
 			}
 			Venda venda = optionalVenda.get();
-			Produto produto = venda.getIdProduto();
-			Optional<Lote> optionalLote = loteRepository.findLoteUsado(produto.getIdProduto());
+			Produto produto = venda.getProduto();
+			Optional<Lote> optionalLote = loteRepository.findLoteUsado(produto.getId());
 			Lote lote = optionalLote.get();
 			int qtdVenda = venda.getQtdVenda();
 			int qtdTotal = lote.getQtdTotal();
 			int qtdCompra = lote.getQtdCompra();
 			while (qtdVenda > 0 ) {
 				if(qtdTotal == lote.getQtdCompra()) {
-					optionalLote = loteRepository.findLoteUsado(produto.getIdProduto());
+					optionalLote = loteRepository.findLoteUsado(produto.getId());
 					lote = optionalLote.get();
 					qtdTotal = lote.getQtdTotal();
 					qtdCompra = lote.getQtdCompra();

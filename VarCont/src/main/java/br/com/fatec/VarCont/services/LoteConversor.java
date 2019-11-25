@@ -23,7 +23,7 @@ public class LoteConversor {
 			produto = optionalProduto.get();
 			Lote lote = new Lote();
 			int qtdCompra = checkCompra(loteResource.getQtdCompra());
-			lote.setIdProduto(produto);
+			lote.setProduto(produto);
 			lote.setQtdCompra(qtdCompra);
 			lote.setQtdTotal(qtdCompra);
 			return lote;
