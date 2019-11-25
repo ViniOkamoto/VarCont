@@ -89,10 +89,10 @@ function listUsers() {
     }, function () { }, function () { }, function (error) {
         const toast = {
             title: 'Erro na listagem de usuários',
-            message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+            message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+            delay: 3000
         }
         NewToast(toast);
-        console.log(error);
     })
 }
 
@@ -119,10 +119,10 @@ $('#user-modal').on('show.bs.modal', function (e) {
         }, function () { }, function () { }, function (error) {
             const toast = {
                 title: 'Erro na consulta do usuário',
-                message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+                message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+                delay: 3000
             }
             NewToast(toast);
-            console.log(error);
         })
     }
 })
@@ -153,7 +153,7 @@ $('.btnSave').click(function () {
                 const toast = {
                     title: 'Sucesso',
                     message: 'Usuário alterado com êxito.',
-                    delay: 4000
+                    delay: 3000
                 }
                 NewToast(toast);
                 $('#user-modal').modal('hide');
@@ -166,10 +166,9 @@ $('.btnSave').click(function () {
                 const toast = {
                     title: 'Erro ao alterar usuário',
                     message: 'Há um problema com a aplicação, entre em contato com o suporte.',
-                    delay: 4000
+                    delay: 3000
                 }
                 NewToast(toast);
-                console.log(error);
             });
         } else {
             api.Adicionar(user, function (response) {
@@ -188,10 +187,10 @@ $('.btnSave').click(function () {
             }, function (error) {
                 const toast = {
                     title: 'Erro ao adicionar usuário',
-                    message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+                    message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+                    delay: 3000
                 }
                 NewToast(toast);
-                console.log(error);
             })
         }
     }
@@ -212,10 +211,10 @@ function deleteClickEvent(){
         }, function(){}, function(){}, function(error){
             const toast = {
                 title: 'Erro ao excluir usuário',
-                message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+                message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+                delay: 3000
             }
             NewToast(toast);
-            console.log(error);
         })
     })
 }
@@ -226,7 +225,7 @@ function validateModalFields() {
         const toast = {
             title: 'Campos vazios',
             message: 'O nome é obrigatório.',
-            delay: 4000
+            delay: 3000
         }
         NewToast(toast)
         erro = true;
@@ -236,7 +235,7 @@ function validateModalFields() {
         const toast = {
             title: 'Campos vazios',
             message: 'O email é obrigatório.',
-            delay: 4000
+            delay: 3000
         }
         NewToast(toast)
         erro = true;
@@ -246,7 +245,7 @@ function validateModalFields() {
         const toast = {
             title: 'Campos vazios',
             message: 'A senha é obrigatória.',
-            delay: 4000
+            delay: 3000
         }
         NewToast(toast)
         erro = true;
@@ -256,7 +255,7 @@ function validateModalFields() {
         const toast = {
             title: 'Campos vazios',
             message: 'O tipo de usuário é obrigatório.',
-            delay: 4000
+            delay: 3000
         }
         NewToast(toast)
         erro = true;

@@ -35,9 +35,8 @@ formSubmit.submit(function(form){
             const toast = { title: 'Erro no Login', message: 'Usuario ou senha inválidos, tente novamente.', delay: 3000 };
             NewToast(toast);
         } else {
-            const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.'};
+            const toast = { title: 'Erro no Login', message: 'Há um problema com a aplicação, entre em contato com o suporte.', delay: 3000};
             NewToast(toast);
         }
-        console.log(erro);
     })
 })
