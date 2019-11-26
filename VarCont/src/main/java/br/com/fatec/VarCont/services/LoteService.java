@@ -46,6 +46,12 @@ public class LoteService {
 		return listaLotes;
 	}
 	
+	public List<Lote> buscarLoteProduto(Long id) {
+
+		LOG.info("Serviço para buscar os lotes, sendo executado");
+		List<Lote> listaLotes = loteRepository.findListLotes(id);
+		return listaLotes;
+	}
 	public void alteraLote(LoteResource loteResource,Long id) throws Exception {
 		LOG.info("Serviço para alterar os lotes, sendo executado");
 		serviceConversor.conversorAltera(loteResource, id);
