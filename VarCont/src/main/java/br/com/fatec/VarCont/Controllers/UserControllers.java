@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping
 public class UserControllers {
 
 	@Autowired

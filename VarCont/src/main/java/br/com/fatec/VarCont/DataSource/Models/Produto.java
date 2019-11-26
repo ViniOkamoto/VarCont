@@ -12,12 +12,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 
 @Entity
 @Table(name = "tbl_produto")
-@JsonRootName(value = "produto")
 public class Produto implements Serializable {
     
 	private static final long serialVersionUID = -1190609681859950392L;
@@ -39,7 +37,6 @@ public class Produto implements Serializable {
     @NotNull(message = "O valor de venda não pode ser vazio")
     private double valorVenda;
     
-
 	public long getId() {
 		return id;
 	}
