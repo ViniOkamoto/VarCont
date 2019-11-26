@@ -1,6 +1,4 @@
 $(function () {
-	fillTable()
-
 	const api = ApiProduto();
 	api.Listar(function (response) {
 		let html = '<option value="default">Selecionar produto</option>'
@@ -19,7 +17,7 @@ $(function () {
 	})
 })
 
-$('#products').change(function(){
+$('#products').change(function () {
 	const idProd = $(this).val();
 	if (idProd != 'default') {
 		fillTable(idProd);
@@ -31,15 +29,16 @@ function fillTable(idProd) {
 	api.Listar(idProd, function (response) {
 		let html = '', saldo = 0, qtd = 0, entradaSoma = 0, saidaSoma = 0, saldoSoma = 0;
 		response.data.forEach(x => {
+			console.log(x)
 			let text;
 			if (x.tipo == false) {
-				saldo += x.quantidade;
-				entradaSoma += x.quantidade * x.produto.valorCompra;
+				saldo += x.qtd;
+				entradaSoma += x.qtd * x.produto.valorCompra;
 				text = '<tr>' +
 					'<th scope="row">' + x.data + '</th>' +
-					'<td>' + x.quantidade + '</td>' +
+					'<td>' + x.qtd + '</td>' +
 					'<td>' + x.produto.valorCompra + '</td>' +
-					'<td>' + (x.quantidade * x.produto.valorCompra) + '</td>' +
+					'<td>' + (x.qtd * x.produto.valorCompra) + '</td>' +
 					'<td></td>' +
 					'<td></td>' +
 					'<td></td>' +
@@ -48,16 +47,16 @@ function fillTable(idProd) {
 					'<td>' + x.produto.valorCompra * saldo + '</td>' +
 					'</tr>';
 			} else {
-				saldo -= x.quantidade;
-				saidaSoma += x.quantidade * x.produto.valorCompra;
+				saldo -= x.qtd;
+				saidaSoma += x.qtd * x.produto.valorCompra;
 				text = '<tr>' +
 					'<th scope="row">' + x.data + '</th>' +
 					'<td></td>' +
 					'<td></td>' +
 					'<td></td>' +
-					'<td>' + x.quantidade + '</td>' +
+					'<td>' + x.qtd + '</td>' +
 					'<td>' + x.produto.valorCompra + '</td>' +
-					'<td>' + (x.quantidade * x.produto.valorCompra) + '</td>' +
+					'<td>' + (x.qtd * x.produto.valorCompra) + '</td>' +
 					'<td>' + saldo + '</td>' +
 					'<td>' + x.produto.valorCompra + '</td>' +
 					'<td>' + x.produto.valorCompra * saldo + '</td>' +
