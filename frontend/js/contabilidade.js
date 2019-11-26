@@ -1,84 +1,84 @@
 $(function () {
-  listarEntrada();
+	fillTable()
+
+	const api = ApiProduto();
+	api.Listar(function (response) {
+		let html = '<option value="default">Selecionar produto</option>'
+		response.data.forEach(x => {
+			let text = '<option value="' + x.id + '">' + x.nomeProd + '</option>'
+			html += text;
+		});
+		$('#products').html(html)
+	}, function () { }, function () { }, function (error) {
+		const toast = {
+			title: 'Erro na listagem dos produtos',
+			message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+			delay: 3000
+		}
+		NewToast(toast);
+	})
 })
-$('.header-card').click(function () {
-  console.log("clicou")
-});
-function expandCardEvent() {
-  const headerCard = $('.header-card');
 
-  headerCard.click(function (e) {
-    let bodyCard = $(this).parent().find('.body-card');
-    let expandIcon = $(this).find('.expand');
+$('#products').change(function(){
+	const idProd = $(this).val();
+	if (idProd != 'default') {
+		fillTable(idProd);
+	}
+})
 
-    if (bodyCard.hasClass('d-none')) {
-      bodyCard.removeClass('d-none');
-      expandIcon.text('expand_less')
-    }
-    else {
-      bodyCard.addClass('d-none');
-      expandIcon.text('expand_more')
-    }
-  })
-}
-
-function listarEntrada() {
-  const api = ApiLote();
-  api.Listar(function (response) {
-    let entrada = "";
-    let saida = "";
-    let saldo = "";
-    let media = "";
-    response.data.forEach(lote => {
-      let totalEntrada = (lote.qtdCompra * lote.produto.valorCompra);
-      let htmlEntrada = '<tr>' +
-        '<th scope="row">' + lote.data + '</th>' +
-        '<td>' + lote.produto.nomeProd + '</td>' +
-        '<td>' + lote.qtdCompra + '</td>' +
-        '<td>' + lote.produto.valorCompra + '</td>' +
-        '<td>' + total + '</td>' +
-        '</tr>';
-
-      let totalSaida = (lote.qtdCompra * lote.produto.valorCompra);
-      let saida = (lote.qtdCompra - lote.qtdTotal)
-      let htmlSaida = '<tr>' +
-        '<th scope="row">' + lote.data + '</th>' +
-        '<td>' + lote.produto.nomeProd + '</td>' +
-        '<td>' + saida + '</td>' +
-        '<td>' + lote.produto.valorVenda + '</td>' +
-        '<td>' + total + '</td>' +
-        '</tr>';
-
-      let totalSaldo = (lote.qtdCompra * lote.produto.valorCompra);
-      let htmlSaldo = '<tr>' +
-        '<th scope="row">' + lote.data + '</th>' +
-        '<td>' + lote.produto.nomeProd + '</td>' +
-        '<td>' + lote.qtdCompra + '</td>' +
-        '<td>' + lote.produto.valorCompra + '</td>' +
-        '<td>' + total + '</td>' +
-        '</tr>';
-      let totalSaldo = (lote.qtdCompra * lote.produto.valorCompra);
-      let htmlSaldo = '<tr>' +
-        '<th scope="row">' + lote.data + '</th>' +
-        '<td>' + lote.produto.nomeProd + '</td>' +
-        '<td>' + lote.qtdCompra + '</td>' +
-        '<td>' + lote.produto.valorCompra + '</td>' +
-        '<td>' + total + '</td>' +
-        '</tr>';
-
-      entrada += htmlEntrada;
-      saida += htmlEntrada;
-      saldo += htmlEntrada;
-      media += htmlEntrada;
-    })
-    $('#table-body').html(text);
-  }, function () { }, function () { }, function (error) {
-    const toast = {
-      title: 'Erro na listagem de lotes',
-      message: 'Há um problema com a aplicação, entre em contato com o suporte.'
-    }
-    NewToast(toast);
-    console.log(error);
-  })
-  api.Listar()
+function fillTable(idProd) {
+	const api = ApiTabela();
+	api.Listar(idProd, function (response) {
+		let html = '', saldo = 0, qtd = 0, entradaSoma = 0, saidaSoma = 0, saldoSoma = 0;
+		response.data.forEach(x => {
+			let text;
+			if (x.tipo == false) {
+				saldo += x.quantidade;
+				entradaSoma += x.quantidade * x.produto.valorCompra;
+				text = '<tr>' +
+					'<th scope="row">' + x.data + '</th>' +
+					'<td>' + x.quantidade + '</td>' +
+					'<td>' + x.produto.valorCompra + '</td>' +
+					'<td>' + (x.quantidade * x.produto.valorCompra) + '</td>' +
+					'<td></td>' +
+					'<td></td>' +
+					'<td></td>' +
+					'<td>' + saldo + '</td>' +
+					'<td>' + x.produto.valorCompra + '</td>' +
+					'<td>' + x.produto.valorCompra * saldo + '</td>' +
+					'</tr>';
+			} else {
+				saldo -= x.quantidade;
+				saidaSoma += x.quantidade * x.produto.valorCompra;
+				text = '<tr>' +
+					'<th scope="row">' + x.data + '</th>' +
+					'<td></td>' +
+					'<td></td>' +
+					'<td></td>' +
+					'<td>' + x.quantidade + '</td>' +
+					'<td>' + x.produto.valorCompra + '</td>' +
+					'<td>' + (x.quantidade * x.produto.valorCompra) + '</td>' +
+					'<td>' + saldo + '</td>' +
+					'<td>' + x.produto.valorCompra + '</td>' +
+					'<td>' + x.produto.valorCompra * saldo + '</td>' +
+					'</tr>';
+			}
+			saldoSoma = x.produto.valorCompra * saldo;
+			html += text;
+		});
+		const htmlFinal = '<tr>' +
+			'<td colspan="3">' + entradaSoma + '</td>' +
+			'<td colspan="3">' + saidaSoma + '</td>' +
+			'<td colspan="3">' + saldoSoma + '</td>' +
+			'</tr>';
+		$('.table-body').html(html);
+		$('.final-table-body').html(htmlFinal);
+	}, function () { }, function () { }, function (error) {
+		const toast = {
+			title: 'Erro na listagem da tabela',
+			message: 'Há um problema com a aplicação, entre em contato com o suporte.',
+			delay: 3000
+		}
+		NewToast(toast);
+	})
 }

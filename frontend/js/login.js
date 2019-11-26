@@ -22,9 +22,9 @@ formSubmit.submit(function(form){
     const api = ApiLogin();
     api.Login(user, function(answer){
         if (answer === 'admin')
-            window.location.replace('http://127.0.0.1:5500/usuarios.html');
-        else
-            console.log('Redirecionando para a tela Caixa.')
+            window.location.replace('http://127.0.0.1:5500/dashboard.html');
+            else
+            window.location.replace('http://127.0.0.1:5500/caixa.html');
     }, function(){
         buttonLogin.text('Carregando...');
     }, function(){
