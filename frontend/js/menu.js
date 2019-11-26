@@ -37,7 +37,12 @@ $(function () {
         '		Lotes' +
         '	</a>' +
         '</div>' +
-        '<input type="text" class="d-none" id="focusmenu"></input>' +
+        '<div class="p-4">' +
+        '	<a href="login.html" class="d-flex align-items-center">' +
+        '		<i class="material-icons mr-3">exit_to_app</i>' +
+        '		Sair' +
+        '	</a>' +
+        '</div>' +
         '</div>'
     )
 
