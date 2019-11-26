@@ -1,4 +1,59 @@
+$(function () {
+	carregarBarras();
+})
 
+function carregarBarras() {
+	const api = ApiLote();
+	api.Estoque(function (response) {
+		const estoques = response.data;
+		let text = "";
+		estoques.forEach(estoque => {
+			console.log(estoque);
+			var id = estoque[0];
+			var nome = estoque[1];
+			var qtdTotal = estoque[2];
+			var qtdCompra = estoque[3];
+			var porcentagem = (qtdTotal / qtdCompra * 100).toFixed(0);
+			console.log(id, nome, qtdTotal, qtdCompra);
+			if (porcentagem <= 50 && porcentagem > 30) {
+				let html = '<div class="container mt-3">' +
+					'<h2> Estoque de ' + nome + '</h2>' +
+					'<div class="progress mt-1">' +
+					'<div class="progress-bar bg-warning" role="progressbar" align="center" aria-valuenow="' + porcentagem + '50" aria-valuemin="0" aria-valuemax="100" style="width:' + porcentagem + '%">' +
+					porcentagem + "%" + '</div>' +
+					'</div>' +
+					'</div>';
+				text += html;
+			} else if (porcentagem <= 30) {
+				let html = '<div class="container mt-3">' +
+					'<h2> Estoque de ' + nome + '</h2>' +
+					'<div class="progress mt-1">' +
+					'<div class="progress-bar bg-danger" role="progressbar" align="center" aria-valuenow="' + porcentagem + '50" aria-valuemin="0" aria-valuemax="100" style="width:' + porcentagem + '%">' +
+					porcentagem + "%" + '</div>' +
+					'</div>' +
+					'</div>';
+				text += html;
+			} else {
+				let html = '<div class="container mt-3">' +
+					'<h2> Estoque de ' + nome + '</h2>' +
+					'<div class="progress mt-1">' +
+					'<div class="progress-bar bg-success" role="progressbar" align="center" aria-valuenow="' + porcentagem + '" aria-valuemin="0" aria-valuemax="100" style="width:' + porcentagem + '%">' +
+					porcentagem + "%" + '</div>' +
+					'</div>' +
+					'</div>';
+				text += html;
+			}
+		})
+		$('.list-estoque').html(text);
+	}, function () { }, function () { }, function (error) {
+		const toast = {
+			title: 'Erro na consulta do produto',
+			message: 'Há um problema com a aplicação, entre em contato com o suporte.'
+		}
+		NewToast(toast);
+		console.log(error);
+	})
+}
 $("#produto-select").change(function () {
 	if ($(this).val() != 'default') {
 		var value = $(this).val();
@@ -50,9 +105,9 @@ function fillDinamicFields() {
 	$('#total-value').val(parseFloat($('#range-value').val()) * parseFloat($('#produto-custo').val()));
 }
 
-$('#btnSale').click(function(e){
+$('#btnSale').click(function (e) {
 	e.preventDefault();
-	if (validateModalFields()){
+	if (validateModalFields()) {
 		const api = ApiVenda();
 		let sale = {
 			idUsuario: $('#usuario-select').val(),
@@ -60,6 +115,7 @@ $('#btnSale').click(function(e){
 			qtdVenda: $('#range-value').val()
 		};
 		api.Adicionar(sale, function (response) {
+			carregarBarras();
 			const toast = {
 				title: 'Sucesso',
 				message: 'Venda efetuada com êxito.',
@@ -85,7 +141,7 @@ $('#btnSale').click(function(e){
 
 $("#venda-caixa").ready(function () {
 	const apiProduto = ApiProduto();
-	carregarSelect("produto");	
+	carregarSelect("produto");
 	function carregarSelect(id) {
 		apiProduto.Listar(function (response) {
 			let text = '<option value="default">Selecionar ' + id + '</option>'
@@ -107,7 +163,7 @@ $("#venda-caixa").ready(function () {
 	}
 
 	const apiUsuario = ApiUsuario();
-	apiUsuario.Listar(function(response){
+	apiUsuario.Listar(function (response) {
 		let text = '<option value="default">Selecionar usuário</option>';
 		const users = response.data;
 		users.forEach(user => {
@@ -115,7 +171,7 @@ $("#venda-caixa").ready(function () {
 			text += html;
 		})
 		$("#usuario-select").html(text)
-	}, function(){}, function(){}, function(error){
+	}, function () { }, function () { }, function (error) {
 		const toast = {
 			title: 'Erro na listagem de usuários',
 			message: 'Há um problema com a aplicação, entre em contato com o suporte.',
@@ -164,7 +220,7 @@ function validateModalFields() {
 		return true;
 }
 
-function clearFields(){
+function clearFields() {
 	$('#produto-select').val('default');
 	$('#produto-custo').val('');
 	$('#estoque-quantidade').val('');

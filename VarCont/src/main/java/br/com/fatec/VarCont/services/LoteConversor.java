@@ -5,15 +5,12 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fatec.VarCont.DataSource.Models.Lote;
 import br.com.fatec.VarCont.DataSource.Models.Produto;
-import br.com.fatec.VarCont.DataSource.Models.Venda;
 import br.com.fatec.VarCont.Repository.LoteRepository;
 import br.com.fatec.VarCont.Repository.ProdutoRepository;
-import br.com.fatec.VarCont.Repository.VendaRepository;
 import br.com.fatec.VarCont.Resource.Models.LoteResource;
 import br.com.fatec.VarCont.exceptions.LoteNotFoundException;
 import br.com.fatec.VarCont.exceptions.LoteResourceException;
@@ -22,10 +19,7 @@ import br.com.fatec.VarCont.exceptions.LoteResourceException;
 public class LoteConversor {
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
-	@Autowired
-	private VendaRepository vendaRepository;
-	
+		
 	@Autowired
 	private LoteRepository loteRepository;
 	

@@ -15,7 +15,7 @@ import br.com.fatec.VarCont.DataSource.Models.Lote;
 @Repository
 public interface LoteRepository extends JpaRepository<Lote, Long>{
 	
-	@Query(value = "select  tl.prod_id ,tp.prod_nome ,SUM(lote_qtd_total) total, SUM(lote_qtd_compra) qtdComparativa FROM tbl_lote tl JOIN tbl_produto tp ON tl.prod_id = tp.prod_id  group by prod_id", nativeQuery = true)
+	@Query(value = "select  tl.prod_id ,tp.prod_nome ,SUM(lote_qtd_total) total, SUM(lote_qtd_compra) qtdComparativa, prod FROM tbl_lote tl JOIN tbl_produto tp ON tl.prod_id = tp.prod_id  group by prod_id", nativeQuery = true)
 	 List<Object> findEstoqueTotais();
 
 	
@@ -26,6 +26,8 @@ public interface LoteRepository extends JpaRepository<Lote, Long>{
 	@Query( value = "SELECT * from tbl_lote WHERE prod_id = :prod_id and lote_data <= now() and lote_qtd_total > 0 ORDER BY lote_data ASC limit 1  ", nativeQuery = true)
 	Optional<Lote> findByPepsProximo(@Param("prod_id") Long id);
 	
+	@Query(value = "SELECT * from tbl_lote where prod_id = :prod_id ORDER BY lote_data ASC", nativeQuery=true)
+	List<Lote> findListLotes(@Param("prod_id") Long id);
 	
 	@Query(value = "select * from tbl_lote where prod_id = :prod_id and lote_data <= now() and lote_qtd_total < lote_qtd_compra ORDER BY lote_data DESC limit 1", nativeQuery = true)
 	Optional<Lote> findLoteUsado(@Param("prod_id") Long id);
