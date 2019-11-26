@@ -60,6 +60,20 @@ function ApiUsuario() {
     return api;
 }
 
+function ApiTabela() {
+    var api = new Object;
+
+    api.Listar = function (idProduct, onSuccess, onBeforeSend, onComplete, onError) {
+        onBeforeSend();
+        axios.get(baseUrlApi + 'tabela/' + idProduct)
+            .then(function (response) { onSuccess(response) })
+            .catch(function (error) { onError(error) })
+            .finally(function () { onComplete() });
+    }
+
+    return api;
+}
+
 function ApiProduto() {
     var api = new Object;
 
