@@ -8,7 +8,7 @@ $(function () {
         '   </a>' +
         '</div>' +
         '<div class="p-4">' +
-        '	<a href="" class="d-flex align-items-center">' +
+        '	<a href="contabilidade.html" class="d-flex align-items-center">' +
         '		<i class="material-icons mr-3">trending_up</i>' +
         '		Contabilidade e Controle' +
         '	</a>' +
