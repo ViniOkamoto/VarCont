@@ -9,8 +9,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import br.com.fatec.VarCont.DataSource.Models.Lote;
 import br.com.fatec.VarCont.DataSource.Models.Produto;
+import br.com.fatec.VarCont.DataSource.Models.Tabela;
 import br.com.fatec.VarCont.Repository.LoteRepository;
 import br.com.fatec.VarCont.Repository.ProdutoRepository;
+import br.com.fatec.VarCont.Repository.TabelaRepository;
 import br.com.fatec.VarCont.Resource.Models.LoteResource;
 import br.com.fatec.VarCont.exceptions.LoteNotFoundException;
 import br.com.fatec.VarCont.exceptions.LoteResourceException;
@@ -23,14 +25,24 @@ public class LoteConversor {
 	@Autowired
 	private LoteRepository loteRepository;
 	
+	@Autowired
+	private TabelaRepository tabelaRepository;
+			
+	
 	public Lote conversor (LoteResource loteResource) throws LoteResourceException{
 		
 		try {
 			Optional<Produto> optionalProduto = produtoRepository.findById(loteResource.getIdProduto());
+			Tabela tabela = new Tabela();
 			Produto produto = new Produto();
 			produto = optionalProduto.get();
 			Lote lote = new Lote();
 			int qtdCompra = checkCompra(loteResource.getQtdCompra());
+			tabela.setData(new Date());
+			tabela.setQtd(qtdCompra);
+			tabela.setProduto(produto);
+			tabela.setTipo(false);
+			tabelaRepository.saveAndFlush(tabela);
 			lote.setData(new Date());
 			lote.setProduto(produto);
 			lote.setQtdCompra(qtdCompra);

@@ -1,5 +1,6 @@
 package br.com.fatec.VarCont.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Component;
 
 import br.com.fatec.VarCont.DataSource.Models.Lote;
 import br.com.fatec.VarCont.DataSource.Models.Produto;
+import br.com.fatec.VarCont.DataSource.Models.Tabela;
 import br.com.fatec.VarCont.DataSource.Models.Usuario;
 import br.com.fatec.VarCont.DataSource.Models.Venda;
 import br.com.fatec.VarCont.Repository.LoteRepository;
 import br.com.fatec.VarCont.Repository.ProdutoRepository;
+import br.com.fatec.VarCont.Repository.TabelaRepository;
 import br.com.fatec.VarCont.Repository.UsuarioRepository;
 import br.com.fatec.VarCont.Resource.Models.VendaResource;
 import br.com.fatec.VarCont.exceptions.VendaResourceException;
@@ -26,6 +29,9 @@ public class VendaConversor {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private TabelaRepository tabelaRepository;
 	
 	public Venda conversor(VendaResource vendaResource) throws VendaResourceException {
 
@@ -67,6 +73,12 @@ public class VendaConversor {
 				antigoTotal -= qtdConta;
 				loteRepository.updateQtdTotal(antigoTotal, loteId);
 			}
+			Tabela tabela = new Tabela();
+			tabela.setData(new Date());
+			tabela.setProduto(produto);
+			tabela.setQtd(qtd);
+			tabela.setTipo(true);
+			tabelaRepository.saveAndFlush(tabela);
 			venda.setProduto(produto);
 			venda.setUsuario(usuario);
 			venda.setQtdVenda(qtd);

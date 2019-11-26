@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fatec.VarCont.DataSource.Models.Lote;
+import br.com.fatec.VarCont.DataSource.Models.Produto;
+import br.com.fatec.VarCont.DataSource.Models.Tabela;
 import br.com.fatec.VarCont.Repository.LoteRepository;
+import br.com.fatec.VarCont.Repository.TabelaRepository;
 import br.com.fatec.VarCont.Resource.Models.LoteResource;
 import br.com.fatec.VarCont.exceptions.LoteNotFoundException;
 import br.com.fatec.VarCont.exceptions.LoteResourceException;
@@ -21,6 +24,9 @@ public class LoteService {
 
 	@Autowired
 	private LoteConversor serviceConversor;
+	
+	@Autowired
+	private TabelaRepository tabelaRepository;
 	
 	private Optional<Lote> getOptional(Long id) {
 		Optional<Lote> optionalLote = loteRepository.findById(id);
@@ -46,12 +52,6 @@ public class LoteService {
 		return listaLotes;
 	}
 	
-	public List<Lote> buscarLoteProduto(Long id) {
-
-		LOG.info("Serviço para buscar os lotes, sendo executado");
-		List<Lote> listaLotes = loteRepository.findListLotes(id);
-		return listaLotes;
-	}
 	public void alteraLote(LoteResource loteResource,Long id) throws Exception {
 		LOG.info("Serviço para alterar os lotes, sendo executado");
 		serviceConversor.conversorAltera(loteResource, id);
@@ -81,8 +81,11 @@ public class LoteService {
 			if(qtdVenda != qtdCompra) {
 				throw new Exception("Não é possível deletar um lote já utilizado");
 			}
+			Produto produto = lote.getProduto();
+			Optional<Tabela> optionalTabela=tabelaRepository.findByData(produto.getId(),lote.getData());
+			tabelaRepository.delete(optionalTabela.get());
 			LOG.info("Serviço para deletar lote, sendo realizado");
-			loteRepository.delete(optionalLote.get());
+			loteRepository.delete(lote);
 		}
 	}
 	

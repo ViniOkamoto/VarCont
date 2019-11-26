@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.fatec.VarCont.DataSource.Models.Lote;
 import br.com.fatec.VarCont.DataSource.Models.Produto;
+import br.com.fatec.VarCont.DataSource.Models.Tabela;
 import br.com.fatec.VarCont.DataSource.Models.Venda;
 import br.com.fatec.VarCont.Repository.LoteRepository;
+import br.com.fatec.VarCont.Repository.TabelaRepository;
 import br.com.fatec.VarCont.Repository.VendaRepository;
 import br.com.fatec.VarCont.Resource.Models.VendaResource;
 import br.com.fatec.VarCont.exceptions.VendaNotFoundException;
@@ -30,6 +32,9 @@ public class VendaService {
 	
 	@Autowired
 	private VendaConversor serviceConversor;
+	
+	@Autowired
+	private TabelaRepository tabelaRepository;
 	
 	
 	public List<Venda> buscarVendas(){
@@ -87,6 +92,9 @@ public class VendaService {
 				Long idLote = lote.getId();
 				loteRepository.updateQtdTotal(qtdTotal, idLote);
 			}
+			
+			Optional<Tabela> optionalTabela = tabelaRepository.findByData(produto.getId(), venda.getData());
+			tabelaRepository.delete(optionalTabela.get());
 			vendaRepository.delete(venda);
 			
 	}
