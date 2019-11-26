@@ -56,7 +56,7 @@ public class LoteConversor {
 		
 	}
 
-	public Lote conversorAltera(LoteResource loteResource, Long id) throws LoteResourceException{
+	public void conversorAltera(LoteResource loteResource, Long id) throws LoteResourceException{
 		
 		try {
 			Optional<Lote> optionalLote= loteRepository.findById(id);
@@ -67,17 +67,24 @@ public class LoteConversor {
 			if(lote.getQtdTotal()!= lote.getQtdCompra()) {
 				throw new Exception("Não é possível alterar um lote já consumido");
 			}
+			Produto produto = lote.getProduto();
+			Tabela tabela;
+			Optional<Tabela> optionalTabela = tabelaRepository.findByData(produto.getId(),lote.getData());
+			tabela = optionalTabela.get();
 			if(loteResource.getQtdCompra() != null) {
 				int qtdCompra = checkCompra(loteResource.getQtdCompra());
 				lote.setQtdCompra(qtdCompra);
 				lote.setQtdTotal(qtdCompra);
+				tabela.setQtd(qtdCompra);
 			}
 			if(loteResource.getIdProduto() != null) {
 				Optional<Produto> optionalProduto = produtoRepository.findById(loteResource.getIdProduto());
-				Produto produto = optionalProduto.get();
+				produto = optionalProduto.get();
 				lote.setProduto(produto);
+				tabela.setProduto(produto);
 			}
-			return lote;
+			loteRepository.save(lote);
+			tabelaRepository.save(tabela);
 		}catch(Exception e) {
 			throw new LoteResourceException(
 					"Falha ao converter o resource para entidade, resource: " + loteResource);

@@ -74,19 +74,18 @@ public class LoteService {
 		Optional<Lote> optionalLote = getOptional(id);
 		if (!optionalLote.isPresent()) {
 			throw new LoteNotFoundException(" Lote não encontrado através do ID: " + id);
-		} else {
+		} 
 			Lote lote = optionalLote.get();
 			int qtdCompra = lote.getQtdCompra();
 			int qtdVenda = lote.getQtdTotal();
 			if(qtdVenda != qtdCompra) {
 				throw new Exception("Não é possível deletar um lote já utilizado");
 			}
-			Produto produto = lote.getProduto();
-			Optional<Tabela> optionalTabela=tabelaRepository.findByData(produto.getId(),lote.getData());
-			tabelaRepository.delete(optionalTabela.get());
 			LOG.info("Serviço para deletar lote, sendo realizado");
+			Produto produto = lote.getProduto();
+			Optional<Tabela> optionalTabela = tabelaRepository.findByData(produto.getId(),lote.getData());
+			tabelaRepository.delete(optionalTabela.get());
 			loteRepository.delete(lote);
-		}
 	}
 	
 	public List<Object> listarEstoques(){
