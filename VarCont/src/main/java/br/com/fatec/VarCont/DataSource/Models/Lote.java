@@ -10,9 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "tbl_lote")
@@ -27,7 +25,7 @@ public class Lote implements Serializable {
 
 	@Column(name = "lote_data")
 	private Date data;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "prod_id", referencedColumnName = "prod_id")
 	private Produto produto;
@@ -36,8 +34,7 @@ public class Lote implements Serializable {
 	private int qtdCompra;
 
 	@Column(name = "lote_qtdTotal")
-	private int qtdTotal; 
-	
+	private int qtdTotal;
 
 	public long getId() {
 		return id;
@@ -82,6 +79,5 @@ public class Lote implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 
 }

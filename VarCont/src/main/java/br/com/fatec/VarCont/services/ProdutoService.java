@@ -38,7 +38,7 @@ public class ProdutoService {
     
     public void cadastrarProduto(ProdutoResource produtoResource){
     	try {
-    		LOG.info("Serviço para criar caixa, sendo executado");
+    		LOG.info("Serviço para criar produto, sendo executado");
     		Produto produto = serviceConversor.conversor(produtoResource);
     		produtoRepository.saveAndFlush(produto);
     		
@@ -51,7 +51,7 @@ public class ProdutoService {
     
     public List<Produto> buscarProduto()
     {
-        LOG.info ("Serviço para buscar os Produtos sendo executado");
+        LOG.info ("Serviço para buscar os produtos sendo executado");
         List<Produto> listaProdutos = produtoRepository.findAll();
         return listaProdutos;
     }
@@ -64,7 +64,7 @@ public class ProdutoService {
 			throw new ProdutoNotFoundException(" Produto não encontrado através do ID: " + id);
 		} 	
 		produto = optionalProduto.get();
-		LOG.info("Serviço para buscar caixa, sendo executado");
+		LOG.info("Serviço para buscar produto, sendo executado");
 		return produto;
 	}
 	
@@ -89,7 +89,7 @@ public class ProdutoService {
     	if(optionalLote.isPresent()) {
     		throw new Exception("Não é possível deletar o produto, pois existe um lote deste produto");
     	}
-    	LOG.info("Serviço para buscar caixa, sendo executado");
+    	LOG.info("Serviço para deletar produto, sendo executado");
     	produtoRepository.delete(optionalProduto.get());
     }
 }

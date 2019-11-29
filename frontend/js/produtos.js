@@ -192,7 +192,7 @@ function validateModalFields() {
 		erro = true;
 	}
 
-	if ($('#produto-entrada').val() == '') {
+	if ($('#produto-entrada').val() == '' || $('#produto-entrada').val() == '0') {
 		const toast = {
 			title: 'Campos vazios',
 			message: 'O preço é obrigatório.',
@@ -202,7 +202,7 @@ function validateModalFields() {
 		erro = true;
 	}
 
-	if ($('#produto-saida').val() == '') {
+	if ($('#produto-saida').val() == '' || $('#produto-saida').val() == '0') {
 		const toast = {
 			title: 'Campos vazios',
 			message: 'O preço é obrigatório.',
@@ -211,7 +211,6 @@ function validateModalFields() {
 		NewToast(toast)
 		erro = true;
 	}
-
 	if (erro)
 		return false;
 	else

@@ -193,7 +193,6 @@ function validateModalFields() {
 		NewToast(toast)
 		erro = true;
 	}
-
 	if ($('#produto-select').val() == 'default') {
 		const toast = {
 			title: 'Campos vazios',
