@@ -3,12 +3,12 @@
 Projeto para Contabilidade, Engenharia de Software e Linguagem de Programação.
 
 ## Começando
-Neste projeto, foi proposto a ideia de relacionar 3 matérias ao uma única aplicação. No início, estavamos com pé atrás de tentar arriscar uma linguagem ao qual ninguém era ambientalizado, o Java, e utilizando o framework Spring Boot.
+Neste projeto, foi proposto a ideia de relacionar 3 matérias à uma única aplicação. No início, estavamos com pé atrás de tentar arriscar uma linguagem ao qual ninguém era ambientalizado, o Java, e utilizando o framework Spring Boot.
 
 > Por fim, resultou em um tipo de protótipo para que possamos aprimorar a ideia sobre o app e quem sabe **joga-lo ao mercado**.
 
 ### O que encontrarei neste repositório?
-Neste repositório se um programa de controle de estoques, custo médio e sistema CRUD.
+Neste repositório se um programa de controle de estoques, custo médio e sistema CRUD, noções sobre orientação .
 
 ## Features
 - Criação de usuários, produtos, lotes, realizações de vendas.
