@@ -10,7 +10,6 @@ Neste projeto, foi proposto a ideia de relacionar 3 matérias à uma única apli
 ### O que encontrarei neste repositório?
 Neste repositório se um programa de controle de estoques, custo médio e sistema CRUD, noções sobre orientação .
 
-## Features
 - Criação de usuários, produtos, lotes, realizações de vendas.
 - Controle de estoque, custo médio e venda.
 - Visualizar como funciona um projeto simples API REST em Spring Boot e HTML E CSS.
